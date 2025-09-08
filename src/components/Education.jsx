@@ -1,4 +1,14 @@
 export default function Education() {
+  const educationData = [
+    {
+      period: "Jan 2017 – Mar 2020",
+      university: "UNIVERSITY OF LOREM IPSUM",
+      degree: "Your Degree Name Here",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+    },
+  ];
+
   return (
     <div className="mb-6">
       <h2 className="text-xl font-bold border-b border-b pb-2 mb-4">EDUCATION</h2>
