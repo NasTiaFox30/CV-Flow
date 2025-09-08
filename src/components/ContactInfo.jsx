@@ -5,7 +5,7 @@ import Icon_adress from "../assets/icons/adress.svg"
 
 export default function ContactInfo() {
   return (
-    <div className="mt-8 text-sm">
+    <div className="mt-8 text-sm w-full">
       <h2 className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 border-gray-200 pb-2">Contact</h2>
       <div className="space-y-4 text-gray-200">
         <div className="flex items-center">
