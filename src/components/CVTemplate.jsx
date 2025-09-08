@@ -4,6 +4,8 @@ import Education from "./Education";
 import WorkExperience from "./WorkExperience";
 import Skills from "./Skills";
 import Hobbies from "./Hobbies";
+import female_avatar from "../assets/avatars/Female_avatar.png";
+import male_avatar from "../assets/avatars/Male_avatar.png";
 
 export default function CVTemplate() {
   return (
