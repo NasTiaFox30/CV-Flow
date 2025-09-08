@@ -11,7 +11,7 @@ export default function Skills() {
   return (
     <div className="mt-8 text-sm w-full">
       <h2 className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 border-gray-200 pb-2">Skills</h2>
-      {skillsData.map((skill, name,  index) => (
+      {skillsData.map((skill, index) => (
         <SkillBar 
           key={index}
           name={skill.name} 
