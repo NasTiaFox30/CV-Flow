@@ -16,13 +16,13 @@ export default function Education() {
         {educationData.map((edu, index) => (
           <div key={index} className="grid grid-cols-2 gap-4">
             <div>
-              <p className="font-semibold">Jan 2017 – Mar 2020</p>
-              <p className="text-gray-500">Your Degree Name Here</p>
+              <p className="font-semibold">{edu.period}</p>
+              <p className="text-gray-500">{edu.degree}</p>
             </div>
 
             <div>
-              <p className="font-bold">UNIVERSITY OF LOREM IPSUM</p>
-              <p className="text-gray-600 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+              <p className="font-bold">{edu.university}</p>
+              <p className="text-gray-600 text-sm">{edu.description}</p>
             </div>
           </div>
         ))}
