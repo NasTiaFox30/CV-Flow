@@ -1,4 +1,9 @@
-import React from "react";
+import ContactInfo from "./ContactInfo";
+import AboutMe from "./AboutMe";
+import Education from "./Education";
+import WorkExperience from "./WorkExperience";
+import Skills from "./Skills";
+import Hobbies from "./Hobbies";
 
 export default function CVTemplate() {
   return (
