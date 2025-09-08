@@ -18,7 +18,7 @@ export default function CVTemplate() {
 
         {/* Right side */}
         <div className="p-8 col-span-2 flex flex-col">
-          <h1 className="text-5xl font-bold mb-1">Name Surename</h1>
+          <h1 className="text-5xl font-bold mb-1 font-extrabold tracking-wide">Name Surename</h1>
           <p className="text-gray-500 mb-6 text-lg">Graphic Designer</p>
         </div>
       </div>
