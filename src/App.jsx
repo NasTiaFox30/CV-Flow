@@ -1,4 +1,4 @@
-import React from 'react';
+import CVTemplate from './components/CVTemplate';
 
 export default function App() {
   return (
