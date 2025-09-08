@@ -5,7 +5,7 @@ export default function CVTemplate() {
     <div className="bg-gray-100 flex justify-center py-8">
       <div
         className="bg-white shadow-lg grid grid-cols-3"
-        style={{width: "794px", height: "1123px"}} // A4 format wrap
+        style={{width: "210mm", height: "297mm"}} // A4 format wrap
       >
         {/* Left side */}
         <div className="p-8 bg-stone-800 text-white col-span-1 flex flex-col items-center">
