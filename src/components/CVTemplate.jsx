@@ -8,8 +8,8 @@ export default function CVTemplate() {
         <div className="flex flex-col items-center">
           <img
             src=""
-            alt="Profile"
-            className="h-50 mb-4"
+            alt="avatar Profile"
+            className="h-60 w-50 object-cover mb-6"
           />
         </div>
       </div>
