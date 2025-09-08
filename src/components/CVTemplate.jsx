@@ -17,7 +17,7 @@ export default function CVTemplate() {
         {/* Left side */}
         <div className="p-8 bg-stone-800 text-white col-span-1 flex flex-col items-center">
           <img
-            src=""
+            src={female_avatar}
             alt="avatar Profile"
             className="h-60 w-50 object-cover mb-6"
           />
