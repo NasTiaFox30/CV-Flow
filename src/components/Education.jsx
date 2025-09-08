@@ -11,7 +11,7 @@ export default function Education() {
 
   return (
     <div className="mb-6">
-      <h2 className="text-xl font-bold border-b border-b pb-2 mb-4">EDUCATION</h2>
+      <h2 className="text-xl font-bold uppercase border-b pb-2 mb-4">EDUCATION</h2>
       <div className="space-y-4">
         {educationData.map((edu, index) => (
           <div key={index} className="grid grid-cols-2 gap-4">

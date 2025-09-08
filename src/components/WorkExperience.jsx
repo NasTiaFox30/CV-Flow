@@ -1,7 +1,7 @@
 export default function WorkExperience() {
   return (
     <div>
-      <h2 className="text-xl font-bold border-b border-b pb-2 mb-4">WORK EXPERIENCE</h2>
+      <h2 className="text-xl font-bold uppercase border-b pb-2 mb-4">WORK EXPERIENCE</h2>
       <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
