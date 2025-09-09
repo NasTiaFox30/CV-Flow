@@ -213,7 +213,7 @@ class Media {
       renderer: this.renderer,
       text: this.text,
       textColor: this.textColor,
-      font: this.font
+      fontFamily: this.font
     });
   }
   update(scroll, direction, centerThreshold = 0.5) {
