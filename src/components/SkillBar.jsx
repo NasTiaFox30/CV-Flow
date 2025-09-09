@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 export default function SkillBar({ name, level }) {
     return (
         <div className="grid grid-cols-2 items-center py-1">
