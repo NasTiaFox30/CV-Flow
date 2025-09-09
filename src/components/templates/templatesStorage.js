@@ -11,3 +11,7 @@ export const templates = [
   },
 ];
 
+export const templateMap = templates.reduce((acc, t) => {
+  acc[t.id] = t.component;
+  return acc;
+}, {});

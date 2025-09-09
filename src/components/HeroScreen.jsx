@@ -1,5 +1,6 @@
 import SplitText from "./SplitText";
-import CircularGallery from "./CircularGallery"
+import CircularGallery from "./CircularGallery";
+import { templates } from "./Templates/templatesStorage";
 
 export default function HeroScreen({ onSelectTemplate }) {
     const handleSelect = (id) => {
