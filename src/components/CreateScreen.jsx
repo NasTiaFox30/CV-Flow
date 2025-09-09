@@ -1,6 +1,4 @@
-import CVTemplate_1 from './templates/CVTemplate_1';
-// import CVTemplate_2 from './templates/CVTemplate_2';
-// import CVTemplate_3 from './templates/CVTemplate_3';
+import { templateMap } from "./Templates/templatesStorage";
 
 export default function CreateScreen({ selectedTemplateId }) {
   const templates = {
