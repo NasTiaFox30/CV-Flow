@@ -20,6 +20,11 @@ export default function HeroScreen() {
                     rootMargin="-100px"
                     textAlign="center"
                 />
+                
+                <p className="mt-4 text-xl md:text-2xl text-center text-gray-700 max-w-2xl mx-auto leading-relaxed">
+                    Stwórz profesjonalne CV bez wysiłku. <br /> 
+                    Skorzystaj z gotowych szablonów i dostosuj je do swoich potrzeb.
+                </p>
             </div>
             
             <p className="mt-4 text-xl text-center text-gray-700">
