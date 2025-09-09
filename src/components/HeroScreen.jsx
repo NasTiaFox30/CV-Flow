@@ -7,7 +7,7 @@ export default function HeroScreen({ onSelectTemplate }) {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen p-4">
+        <div className="flex flex-col items-center justify-center max-h-screen p-4">
 
             {/* Hero title */}
             <div className="text-center mb-6">
@@ -32,7 +32,7 @@ export default function HeroScreen({ onSelectTemplate }) {
             </div>
 
             {/* Gallery */}
-            <div className="w-full max-w-6xl mx-auto mb-16" style={{ height: '500px', position: 'relative' }}>
+            <div className="w-full max-w-6xl mx-auto mb-5" style={{ height: '500px', position: 'relative' }}>
                 <CircularGallery 
                     items={[
                         {id: 1, image: `https://picsum.photos/seed/1/800/1000?grayscale`, text: 'Classic CV' },
