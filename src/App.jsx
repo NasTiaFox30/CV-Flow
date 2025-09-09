@@ -3,7 +3,7 @@ import CreateScreen from './components/CreateScreen';
 import HeroScreen from './components/HeroScreen';
 
 export default function App() {
-  const [templateId, setTemplateId] = useState(1);
+  const [templateId, setTemplateId] = useState(null);
 
   const handleSelectedTemplate = (id) => {
     setTemplateId(id);
