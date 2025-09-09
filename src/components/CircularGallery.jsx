@@ -43,7 +43,7 @@ function createTextTexture(gl, text, font = 'bold 30px monospace', color = 'blac
 }
 
 class Title {
-  constructor({ gl, plane, renderer, text, textColor = '#545050', font = '30px sans-serif' }) {
+  constructor({ gl, plane, renderer, text, textColor = '#000', font = '30px sans-serif' }) {
     autoBind(this);
     this.gl = gl;
     this.plane = plane;
@@ -88,6 +88,7 @@ class Title {
     this.mesh.scale.set(textWidth, textHeight, 1);
     this.mesh.position.y = -this.plane.scale.y * 0.5 - textHeight * 0.5 - 0.05;
     this.mesh.setParent(this.plane);
+    this.mesh.visible = false; // Початково прихований
   }
 }
 
@@ -103,7 +104,6 @@ class Media {
     screen,
     text,
     viewport,
-    bend,
     textColor,
     borderRadius = 0,
     font
@@ -119,10 +119,13 @@ class Media {
     this.screen = screen;
     this.text = text;
     this.viewport = viewport;
-    this.bend = bend;
     this.textColor = textColor;
     this.borderRadius = borderRadius;
     this.font = font;
+    this.isHovered = false;
+    this.isCenter = false;
+    this.scaleTarget = 1;
+    this.scaleCurrent = 1;
     this.createShader();
     this.createMesh();
     this.createTitle();
@@ -141,14 +144,10 @@ class Media {
         attribute vec2 uv;
         uniform mat4 modelViewMatrix;
         uniform mat4 projectionMatrix;
-        uniform float uTime;
-        uniform float uSpeed;
         varying vec2 vUv;
         void main() {
           vUv = uv;
-          vec3 p = position;
-          p.z = (sin(p.x * 4.0 + uTime) * 1.5 + cos(p.y * 2.0 + uTime) * 1.5) * (0.1 + uSpeed * 0.5);
-          gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
       fragment: `
@@ -188,8 +187,6 @@ class Media {
         tMap: { value: texture },
         uPlaneSizes: { value: [0, 0] },
         uImageSizes: { value: [0, 0] },
-        uSpeed: { value: 0 },
-        uTime: { value: 100 * Math.random() },
         uBorderRadius: { value: this.borderRadius }
       },
       transparent: true
@@ -216,36 +213,32 @@ class Media {
       renderer: this.renderer,
       text: this.text,
       textColor: this.textColor,
-      fontFamily: this.font
+      font: this.font
     });
   }
-  update(scroll, direction) {
+  update(scroll, direction, centerThreshold = 0.5) {
     this.plane.position.x = this.x - scroll.current - this.extra;
 
-    const x = this.plane.position.x;
-    const H = this.viewport.width / 2;
+    // Всі шаблони на одному рівні
+    this.plane.position.y = 0;
+    this.plane.rotation.z = 0;
 
-    if (this.bend === 0) {
-      this.plane.position.y = 0;
-      this.plane.rotation.z = 0;
-    } else {
-      const B_abs = Math.abs(this.bend);
-      const R = (H * H + B_abs * B_abs) / (2 * B_abs);
-      const effectiveX = Math.min(Math.abs(x), H);
-
-      const arc = R - Math.sqrt(R * R - effectiveX * effectiveX);
-      if (this.bend > 0) {
-        this.plane.position.y = -arc;
-        this.plane.rotation.z = -Math.sign(x) * Math.asin(effectiveX / R);
-      } else {
-        this.plane.position.y = arc;
-        this.plane.rotation.z = Math.sign(x) * Math.asin(effectiveX / R);
-      }
+    // Перевірка чи фото в центрі
+    const isCenter = Math.abs(this.plane.position.x) < centerThreshold;
+    
+    if (isCenter !== this.isCenter) {
+      this.isCenter = isCenter;
+      this.scaleTarget = isCenter ? 1.1 : 1;
+      this.title.mesh.visible = isCenter;
     }
 
-    this.speed = scroll.current - scroll.last;
-    this.program.uniforms.uTime.value += 0.04;
-    this.program.uniforms.uSpeed.value = this.speed;
+    // Плавна анімація масштабу
+    this.scaleCurrent = lerp(this.scaleCurrent, this.scaleTarget, 0.1);
+    this.plane.scale.set(
+      this.baseScale.x * this.scaleCurrent,
+      this.baseScale.y * this.scaleCurrent,
+      1
+    );
 
     const planeOffset = this.plane.scale.x / 2;
     const viewportOffset = this.viewport.width / 2;
@@ -269,11 +262,15 @@ class Media {
       }
     }
     this.scale = this.screen.height / 1500;
-    this.plane.scale.y = (this.viewport.height * (900 * this.scale)) / this.screen.height;
-    this.plane.scale.x = (this.viewport.width * (700 * this.scale)) / this.screen.width;
-    this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
+    const scaleY = (this.viewport.height * (900 * this.scale)) / this.screen.height;
+    const scaleX = (this.viewport.width * (700 * this.scale)) / this.screen.width;
+    
+    this.baseScale = { x: scaleX, y: scaleY };
+    this.plane.scale.set(scaleX, scaleY, 1);
+    
+    this.plane.program.uniforms.uPlaneSizes.value = [scaleX, scaleY];
     this.padding = 2;
-    this.width = this.plane.scale.x + this.padding;
+    this.width = scaleX + this.padding;
     this.widthTotal = this.width * this.length;
     this.x = this.width * this.index;
   }
@@ -284,12 +281,11 @@ class App {
     container,
     {
       items,
-      bend,
-      textColor = '#ffffff',
+      textColor = '#000',
       borderRadius = 0,
       font = 'bold 30px Figtree',
       scrollSpeed = 2,
-      scrollEase = 0.05
+      scrollEase = 0.01
     } = {}
   ) {
     document.documentElement.classList.remove('no-js');
@@ -302,7 +298,7 @@ class App {
     this.createScene();
     this.onResize();
     this.createGeometry();
-    this.createMedias(items, bend, textColor, borderRadius, font);
+    this.createMedias(items, textColor, borderRadius, font);
     this.update();
     this.addEventListeners();
   }
@@ -326,14 +322,19 @@ class App {
   }
   createGeometry() {
     this.planeGeometry = new Plane(this.gl, {
-      heightSegments: 50,
-      widthSegments: 100
+      heightSegments: 1,
+      widthSegments: 1
     });
   }
-  createMedias(items, bend = 1, textColor, borderRadius, font) {
+  createMedias(items, textColor, borderRadius, font) {
     const defaultItems = [
-      { image: `https://picsum.photos/seed/1/800/600?grayscale`, text: 'Classic' },
-
+      { image: `https://picsum.photos/seed/1/800/1000?grayscale`, text: 'Classic CV' },
+      { image: `https://picsum.photos/seed/1/800/1000?grayscale`, text: 'Modern CV' },
+      { image: `https://picsum.photos/seed/2/800/1000?grayscale`, text: 'Professional CV' },
+      { image: `https://picsum.photos/seed/3/800/1000?grayscale`, text: 'Creative CV' },
+      { image: `https://picsum.photos/seed/4/800/1000?grayscale`, text: 'Minimalist CV' },
+      { image: `https://picsum.photos/seed/5/800/1000?grayscale`, text: 'Executive CV' },
+      { image: `https://picsum.photos/seed/16/800/1000?grayscale`, text: 'Academic CV' }
     ];
     const galleryItems = items && items.length ? items : defaultItems;
     this.mediasImages = galleryItems.concat(galleryItems);
@@ -349,7 +350,6 @@ class App {
         screen: this.screen,
         text: data.text,
         viewport: this.viewport,
-        bend,
         textColor,
         borderRadius,
         font
@@ -403,9 +403,13 @@ class App {
   update() {
     this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
     const direction = this.scroll.current > this.scroll.last ? 'right' : 'left';
+    
     if (this.medias) {
-      this.medias.forEach(media => media.update(this.scroll, direction));
+      // Визначаємо поріг для центрального положення (5% від ширини viewport)
+      const centerThreshold = this.viewport.width * 0.05;
+      this.medias.forEach(media => media.update(this.scroll, direction, centerThreshold));
     }
+    
     this.renderer.render({ scene: this.scene, camera: this.camera });
     this.scroll.last = this.scroll.current;
     this.raf = window.requestAnimationFrame(this.update.bind(this));
@@ -445,19 +449,18 @@ class App {
 
 export default function CircularGallery({
   items,
-  bend = 3,
   textColor = '#000',
-  borderRadius = 0.05,
+  borderRadius = 0.01,
   font = 'bold 30px Figtree',
   scrollSpeed = 2,
   scrollEase = 0.05
 }) {
   const containerRef = useRef(null);
   useEffect(() => {
-    const app = new App(containerRef.current, { items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase });
+    const app = new App(containerRef.current, { items, textColor, borderRadius, font, scrollSpeed, scrollEase });
     return () => {
       app.destroy();
     };
-  }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase]);
+  }, [items, textColor, borderRadius, font, scrollSpeed, scrollEase]);
   return <div className="circular-gallery" ref={containerRef} />;
 }
