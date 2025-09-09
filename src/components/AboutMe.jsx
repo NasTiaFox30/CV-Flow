@@ -1,3 +1,5 @@
+import EditableText from "./EditableField"; 
+  
 export default function AboutMe() {
   return (
     <div className="mb-6">
