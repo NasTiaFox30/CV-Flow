@@ -1,7 +1,7 @@
-import EditableText from "./EditableField";
-import Icon_phone from "../assets/icons/phone.svg"
-import Icon_email from "../assets/icons/email.svg"
-import Icon_adress from "../assets/icons/adress.svg"
+import EditableText from "../EditableField";
+import Icon_phone from "../../assets/icons/phone.svg"
+import Icon_email from "../../assets/icons/email.svg"
+import Icon_adress from "../../assets/icons/adress.svg"
 
 export default function ContactInfo() {
   return (

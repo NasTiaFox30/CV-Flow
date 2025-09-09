@@ -1,4 +1,4 @@
-import EditableText from "./EditableField";
+import EditableText from "../EditableField";
 
 export default function WorkExperience() {
   return (

@@ -1,4 +1,4 @@
-import EditableText from "./EditableField";
+import EditableText from "../EditableField";
 
 export default function Hobbies() {
   const hobbiesData = [ "Graphic Design", "Photography", "Videography"];
@@ -14,8 +14,9 @@ export default function Hobbies() {
       />
 
       <div className="space-y-4 text-gray-200">
-        {hobbiesData.map((hobby) => (
+        {hobbiesData.map((hobby, index) => (
           <EditableText
+            key={index}
             tag="li"
             className=""
             value={hobby}

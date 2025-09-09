@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import EditableText from './EditableField';
+import EditableText from '../EditableField';
 
 export default function SkillBar({ name, level }) {
   const [isEditing, setIsEditing] = useState(false);
