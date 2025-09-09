@@ -333,7 +333,6 @@ class App {
       { image: `https://picsum.photos/seed/2/800/1000?grayscale`, text: 'Professional CV' },
       { image: `https://picsum.photos/seed/3/800/1000?grayscale`, text: 'Creative CV' },
       { image: `https://picsum.photos/seed/4/800/1000?grayscale`, text: 'Minimalist CV' },
-      { image: `https://picsum.photos/seed/5/800/1000?grayscale`, text: 'Executive CV' },
       { image: `https://picsum.photos/seed/16/800/1000?grayscale`, text: 'Academic CV' }
     ];
     const galleryItems = items && items.length ? items : defaultItems;
