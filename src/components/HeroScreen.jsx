@@ -47,6 +47,7 @@ export default function HeroScreen({ onSelectTemplate }) {
                     font="bold 32px Arial"
                     scrollSpeed={2}
                     scrollEase={0.03}
+                    onSelect={handleSelect}
                 />
             </div>
         </div> 
