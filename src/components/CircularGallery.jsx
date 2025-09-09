@@ -339,7 +339,7 @@ class App {
     this.gl.clearColor(0, 0, 0, 0);
     this.container.appendChild(this.gl.canvas);
     this.gl.canvas.style.cursor = 'pointer';
-    this.gl.canvas.addEventListener('click', this.handleCanvasClick);
+    this.gl.canvas.addEventListener('dblclick', this.handleCanvasClick);
   }
   createCamera() {
     this.camera = new Camera(this.gl);
