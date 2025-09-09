@@ -1,7 +1,11 @@
 import SplitText from "./SplitText";
 import CircularGallery from "./CircularGallery"
 
-export default function HeroScreen() {
+export default function HeroScreen({ onSelectTemplate }) {
+    const handleSelect = (id) => {
+        onSelectTemplate(id);
+    };
+
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-4">
 
