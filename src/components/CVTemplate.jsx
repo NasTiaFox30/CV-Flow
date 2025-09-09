@@ -16,12 +16,7 @@ export default function CVTemplate() {
       >
         {/* Left side */}
         <div className="p-8 bg-stone-800 text-white col-span-1 flex flex-col items-center">
-          <img
-            src={female_avatar}
-            alt="avatar Profile"
-            className="h-60 w-50 object-cover mb-6"
-          />
-          
+          <AvatarFrame />
           <ContactInfo />
           <Skills />
           <Hobbies />
@@ -29,22 +24,7 @@ export default function CVTemplate() {
 
         {/* Right side */}
         <div className="p-8 col-span-2 flex flex-col">
-          {/* <h1 className="text-5xl font-bold mb-1 font-extrabold tracking-wide">Name Surename</h1> */}
-          <EditableText
-            tag="h1"
-            className="text-5xl font-bold mb-1 font-extrabold tracking-wide"
-            value="Name Surename"
-            onUpdate={(text) => onUpdate({ ...section, content: text })}
-          />
-
-          {/* <p className="text-gray-500 mb-6 text-lg">Graphic Designer</p> */}
-          <EditableText
-            tag="p"
-            className="text-gray-500 mb-6 text-lg"
-            value="COMPANY OF LOREM IPSUM"
-            onUpdate={(text) => onUpdate({ ...section, content: text })}
-          />
-
+          <HeaderSections />
           <AboutMe />
           <Education />
           <WorkExperience />
