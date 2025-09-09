@@ -5,19 +5,20 @@ export default function HeroScreen() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen p-4">
 
-            <div className="text-center">
+            {/* Hero title */}
+            <div className="text-center mb-6">
                 <SplitText
-                text="CV Flow"
-                className="text-5xl font-extrabold text-black"
-                delay={100}
-                duration={0.6}
-                ease="power3.out"
-                splitType="chars"
-                from={{ opacity: 0, y: 40 }}
-                to={{ opacity: 1, y: 0 }}
-                threshold={0.1}
-                rootMargin="-100px"
-                textAlign="center"
+                    text="CV Flow"
+                    className="text-6xl md:text-7xl font-extrabold text-black mb-4"
+                    delay={100}
+                    duration={0.6}
+                    ease="power3.out"
+                    splitType="chars"
+                    from={{ opacity: 0, y: 40 }}
+                    to={{ opacity: 1, y: 0 }}
+                    threshold={0.1}
+                    rootMargin="-100px"
+                    textAlign="center"
                 />
             </div>
             
