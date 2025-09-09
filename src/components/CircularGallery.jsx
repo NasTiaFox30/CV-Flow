@@ -405,8 +405,7 @@ class App {
     const direction = this.scroll.current > this.scroll.last ? 'right' : 'left';
     
     if (this.medias) {
-      // Визначаємо поріг для центрального положення (5% від ширини viewport)
-      const centerThreshold = this.viewport.width * 0.05;
+      const centerThreshold = this.viewport.width * 0.09;
       this.medias.forEach(media => media.update(this.scroll, direction, centerThreshold));
     }
     
