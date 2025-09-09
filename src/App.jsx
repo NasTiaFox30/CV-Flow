@@ -1,4 +1,6 @@
-import CVTemplate from './components/CVTemplate';
+import { useState } from 'react';
+import CreateScreen from './components/CreateScreen';
+import HeroScreen from './components/HeroScreen';
 
 export default function App() {
   return (
