@@ -1,3 +1,5 @@
+import HeaderSections from "./Blocks/HeaderSections";
+import AvatarFrame from "./Blocks/AvatarFrame";
 import ContactInfo from "./Blocks/ContactInfo";
 import AboutMe from "./Blocks/AboutMe";
 import Education from "./Blocks/Education";
