@@ -219,11 +219,9 @@ class Media {
   update(scroll, direction, centerThreshold = 0.5) {
     this.plane.position.x = this.x - scroll.current - this.extra;
 
-    // Всі шаблони на одному рівні
     this.plane.position.y = 0;
     this.plane.rotation.z = 0;
 
-    // Перевірка чи фото в центрі
     const isCenter = Math.abs(this.plane.position.x) < centerThreshold;
     
     if (isCenter !== this.isCenter) {
@@ -232,7 +230,6 @@ class Media {
       this.title.mesh.visible = isCenter;
     }
 
-    // Плавна анімація масштабу
     this.scaleCurrent = lerp(this.scaleCurrent, this.scaleTarget, 0.1);
     this.plane.scale.set(
       this.baseScale.x * this.scaleCurrent,
@@ -414,13 +411,10 @@ class App {
   }
   addEventListeners() {
     this.boundOnResize = this.onResize.bind(this);
-    this.boundOnWheel = this.onWheel.bind(this);
     this.boundOnTouchDown = this.onTouchDown.bind(this);
     this.boundOnTouchMove = this.onTouchMove.bind(this);
     this.boundOnTouchUp = this.onTouchUp.bind(this);
     window.addEventListener('resize', this.boundOnResize);
-    window.addEventListener('mousewheel', this.boundOnWheel);
-    window.addEventListener('wheel', this.boundOnWheel);
     window.addEventListener('mousedown', this.boundOnTouchDown);
     window.addEventListener('mousemove', this.boundOnTouchMove);
     window.addEventListener('mouseup', this.boundOnTouchUp);
@@ -431,8 +425,6 @@ class App {
   destroy() {
     window.cancelAnimationFrame(this.raf);
     window.removeEventListener('resize', this.boundOnResize);
-    window.removeEventListener('mousewheel', this.boundOnWheel);
-    window.removeEventListener('wheel', this.boundOnWheel);
     window.removeEventListener('mousedown', this.boundOnTouchDown);
     window.removeEventListener('mousemove', this.boundOnTouchMove);
     window.removeEventListener('mouseup', this.boundOnTouchUp);
