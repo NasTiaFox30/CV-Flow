@@ -18,9 +18,32 @@ export default function App() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen p-8">
-      <HeroScreen onSelectTemplate={handleSelectedTemplate} />
-      <CreateScreen selectedTemplateId={templateId} />
+    <div className="bg-gray-100 min-h-screen p-8 relative overflow-hidden">
+      <AnimatePresence mode="wait">
+        {templateId === null ? (
+          <motion.div
+            key="heroScreen"
+            variants={animations_variants}
+            initial="hidden"
+            animate="enter"
+            exit="exit"
+            transition={{ type: 'linear' }}
+          >
+            <HeroScreen onSelectTemplate={handleSelectedTemplate} />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="createScreen"
+            variants={animations_variants}
+            initial="hidden"
+            animate="enter"
+            exit="exit"
+            transition={{ type: 'linear' }}
+          >
+            <CreateScreen selectedTemplateId={templateId} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
