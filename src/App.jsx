@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import CreateScreen from './components/CreateScreen';
 import HeroScreen from './components/HeroScreen';
 
