@@ -1,11 +1,11 @@
-import HeaderSections from "./Blocks/HeaderSections";
-import AvatarFrame from "./Blocks/AvatarFrame";
-import ContactInfo from "./Blocks/ContactInfo";
-import AboutMe from "./Blocks/AboutMe";
-import Education from "./Blocks/Education";
-import WorkExperience from "./Blocks/WorkExperience";
-import Skills from "./Blocks/Skills";
-import Hobbies from "./Blocks/Hobbies";
+import HeaderSections from "../Blocks/HeaderSections";
+import AvatarFrame from "../Blocks/AvatarFrame";
+import ContactInfo from "../Blocks/ContactInfo";
+import AboutMe from "../Blocks/AboutMe";
+import Education from "../Blocks/Education";
+import WorkExperience from "../Blocks/WorkExperience";
+import Skills from "../Blocks/Skills";
+import Hobbies from "../Blocks/Hobbies";
 
 export default function CVTemplate() {
   return (
