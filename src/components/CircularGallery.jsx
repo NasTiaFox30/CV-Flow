@@ -88,7 +88,7 @@ class Title {
     this.mesh.scale.set(textWidth, textHeight, 1);
     this.mesh.position.y = -this.plane.scale.y * 0.5 - textHeight * 0.5 - 0.05;
     this.mesh.setParent(this.plane);
-    this.mesh.visible = false; // Початково прихований
+    this.mesh.visible = false;
   }
 }
 
