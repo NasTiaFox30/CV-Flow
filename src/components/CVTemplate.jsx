@@ -6,9 +6,6 @@ import Education from "./Blocks/Education";
 import WorkExperience from "./Blocks/WorkExperience";
 import Skills from "./Blocks/Skills";
 import Hobbies from "./Blocks/Hobbies";
-import female_avatar from "../assets/avatars/Female_avatar.png";
-import male_avatar from "../assets/avatars/Male_avatar.png";
-import EditableText from "./EditableField";
 
 export default function CVTemplate() {
   return (
