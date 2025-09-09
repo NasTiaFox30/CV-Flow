@@ -31,12 +31,12 @@ export default function HeroScreen() {
             <div className="w-full max-w-6xl mx-auto mb-16" style={{ height: '500px', position: 'relative' }}>
                 <CircularGallery 
                     items={[
-                        { image: `https://picsum.photos/seed/1/800/1000?grayscale`, text: 'Classic CV' },
-                        { image: `https://picsum.photos/seed/1/800/1000?grayscale`, text: 'Modern CV' },
-                        { image: `https://picsum.photos/seed/2/800/1000?grayscale`, text: 'Professional CV' },
-                        { image: `https://picsum.photos/seed/3/800/1000?grayscale`, text: 'Creative CV' },
-                        { image: `https://picsum.photos/seed/4/800/1000?grayscale`, text: 'Minimalist CV' },
-                        { image: `https://picsum.photos/seed/16/800/1000?grayscale`, text: 'Academic CV' }
+                        {id: 1, image: `https://picsum.photos/seed/1/800/1000?grayscale`, text: 'Classic CV' },
+                        {id: 2, image: `https://picsum.photos/seed/1/800/1000?grayscale`, text: 'Modern CV' },
+                        {id: 3, image: `https://picsum.photos/seed/2/800/1000?grayscale`, text: 'Professional CV' },
+                        {id: 4, image: `https://picsum.photos/seed/3/800/1000?grayscale`, text: 'Creative CV' },
+                        {id: 5, image: `https://picsum.photos/seed/4/800/1000?grayscale`, text: 'Minimalist CV' },
+                        {id: 6, image: `https://picsum.photos/seed/16/800/1000?grayscale`, text: 'Academic CV' }
                     ]}
                     textColor="#000000"
                     borderRadius={0.02}
