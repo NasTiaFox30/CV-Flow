@@ -106,7 +106,9 @@ class Media {
     viewport,
     textColor,
     borderRadius = 0,
-    font
+    font,
+    id,
+    onSelect
   }) {
     this.extra = 0;
     this.geometry = geometry;
@@ -122,7 +124,8 @@ class Media {
     this.textColor = textColor;
     this.borderRadius = borderRadius;
     this.font = font;
-    this.isHovered = false;
+    this.id = id;
+    this.onSelect = onSelect;
     this.isCenter = false;
     this.scaleTarget = 1;
     this.scaleCurrent = 1;
@@ -282,7 +285,8 @@ class App {
       borderRadius = 0,
       font = 'bold 30px Figtree',
       scrollSpeed = 2,
-      scrollEase = 0.01
+      scrollEase = 0.01,
+      onSelect
     } = {}
   ) {
     document.documentElement.classList.remove('no-js');
@@ -325,12 +329,12 @@ class App {
   }
   createMedias(items, textColor, borderRadius, font) {
     const defaultItems = [
-      { image: `https://picsum.photos/seed/1/800/1000?grayscale`, text: 'Classic CV' },
-      { image: `https://picsum.photos/seed/1/800/1000?grayscale`, text: 'Modern CV' },
-      { image: `https://picsum.photos/seed/2/800/1000?grayscale`, text: 'Professional CV' },
-      { image: `https://picsum.photos/seed/3/800/1000?grayscale`, text: 'Creative CV' },
-      { image: `https://picsum.photos/seed/4/800/1000?grayscale`, text: 'Minimalist CV' },
-      { image: `https://picsum.photos/seed/16/800/1000?grayscale`, text: 'Academic CV' }
+      { id: 'classic', image: `https://picsum.photos/seed/1/800/1000?grayscale`, text: 'Classic CV' },
+      { id: 'modern', image: `https://picsum.photos/seed/2/800/1000?grayscale`, text: 'Modern CV' },
+      { id: 'professional', image: `https://picsum.photos/seed/3/800/1000?grayscale`, text: 'Professional CV' },
+      { id: 'creative', image: `https://picsum.photos/seed/4/800/1000?grayscale`, text: 'Creative CV' },
+      { id: 'minimalist', image: `https://picsum.photos/seed/5/800/1000?grayscale`, text: 'Minimalist CV' },
+      { id: 'academic', image: `https://picsum.photos/seed/6/800/1000?grayscale`, text: 'Academic CV' }
     ];
     const galleryItems = items && items.length ? items : defaultItems;
     this.mediasImages = galleryItems.concat(galleryItems);
@@ -348,7 +352,9 @@ class App {
         viewport: this.viewport,
         textColor,
         borderRadius,
-        font
+        font,
+        id: data.id,
+        onSelect: this.onSelect
       });
     });
   }
@@ -443,14 +449,23 @@ export default function CircularGallery({
   borderRadius = 0,
   font = 'bold 30px Figtree',
   scrollSpeed = 2,
-  scrollEase = 0.05
+  scrollEase = 0.05,
+  onSelect
 }) {
   const containerRef = useRef(null);
   useEffect(() => {
-    const app = new App(containerRef.current, { items, textColor, borderRadius, font, scrollSpeed, scrollEase });
+    const app = new App(containerRef.current, { 
+      items, 
+      textColor, 
+      borderRadius, 
+      font, 
+      scrollSpeed, 
+      scrollEase,
+      onSelect 
+    });
     return () => {
       app.destroy();
     };
-  }, [items, textColor, borderRadius, font, scrollSpeed, scrollEase]);
+  }, [items, textColor, borderRadius, font, scrollSpeed, scrollEase, onSelect]);
   return <div className="circular-gallery" ref={containerRef} />;
 }
