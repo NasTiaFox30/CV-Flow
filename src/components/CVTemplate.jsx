@@ -23,11 +23,16 @@ export default function CVTemplate() {
         </div>
 
         {/* Right side */}
-        <div className="p-8 col-span-2 flex flex-col">
-          <HeaderSections />
-          <AboutMe />
-          <Education />
-          <WorkExperience />
+        <div className="col-span-2 flex flex-col">
+          <div className="mt-8 p-8 w-full bg-stone-100">
+            <HeaderSections />
+            <AboutMe />
+          </div>
+          <div className="m-8">
+            <Education />
+            <WorkExperience />
+          </div>
+          
         </div>
       </div>
     </div>
