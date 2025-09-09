@@ -1,3 +1,5 @@
+import EditableText from "./EditableField";
+
 export default function Education() {
   const educationData = [
     {
