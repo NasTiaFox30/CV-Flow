@@ -1,12 +1,7 @@
 import { templateMap } from "./Templates/templatesStorage";
 
 export default function CreateScreen({ selectedTemplateId }) {
-  const templates = {
-    1: CVTemplate_1,
-    // 2: CVTemplate_2,
-    // 3: CVTemplate_3,
-  };
-  const TemplateComponent = templates[selectedTemplateId];
+  const TemplateComponent = templateMap[selectedTemplateId];
 
   return (
     <div className="flex flex-col">
