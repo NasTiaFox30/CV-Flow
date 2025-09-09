@@ -1,3 +1,4 @@
+import SplitText from "./SplitText";
 import CircularGallery from "./CircularGallery"
 
 export default function HeroScreen() {
