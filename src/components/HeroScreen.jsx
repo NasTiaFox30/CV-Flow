@@ -26,12 +26,9 @@ export default function HeroScreen() {
                     Skorzystaj z gotowych szablonów i dostosuj je do swoich potrzeb.
                 </p>
             </div>
-            
-            <p className="mt-4 text-xl text-center text-gray-700">
-                Stwórz profesjonalne CV bez wysiłku. <br /> Skorzystaj z gotowych szablonów i dostosuj je do swoich potrzeb.
-            </p>
 
-            <div style={{ height: '600px', width: '90%', position: 'relative' }}>
+            {/* Gallery */}
+            <div className="w-full max-w-6xl mx-auto mb-16" style={{ height: '500px', position: 'relative' }}>
                 <CircularGallery 
                     items={[
                         { image: `https://picsum.photos/seed/1/800/1000?grayscale`, text: 'Classic CV' },
