@@ -3,6 +3,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import CreateScreen from './components/CreateScreen';
 import HeroScreen from './components/HeroScreen';
 
+const animations_variants = {
+  hidden: { opacity: 0, x: 0, y: 200 },
+  enter: { opacity: 1, x: 0, y: 0 },
+  exit: { opacity: 0, x: 0, y: -200 },
+};
+
 export default function App() {
   const [templateId, setTemplateId] = useState(null);
 
