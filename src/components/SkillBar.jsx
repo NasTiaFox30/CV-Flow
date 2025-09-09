@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import EditableText from './EditableField';
 
 export default function SkillBar({ name, level }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -38,7 +39,14 @@ export default function SkillBar({ name, level }) {
       </div>
     ) : (
       <div className="flex items-center justify-between py-1 relative text-gray-200">
-        <p className="flex-grow">{name}</p>
+        {/* <p className="flex-grow">{name}</p> */}
+        <EditableText
+            tag="p"
+            className="flex-grow"
+            value={ name }
+            onUpdate={(text) => onUpdate({ ...section, content: text })}
+        />      
+                  
         <div
           className="flex-grow cursor-pointer"
           onClick={handleBarClick}

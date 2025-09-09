@@ -1,3 +1,4 @@
+import EditableText from "./EditableField";
 import SkillBar from "./SkillBar";
 
 const skillsData = [
