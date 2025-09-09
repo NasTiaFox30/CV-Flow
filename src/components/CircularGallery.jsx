@@ -228,7 +228,7 @@ class Media {
     
     if (isCenter !== this.isCenter) {
       this.isCenter = isCenter;
-      this.scaleTarget = isCenter ? 1.1 : 1;
+      this.scaleTarget = isCenter ? 1.2 : 1;
       this.title.mesh.visible = isCenter;
     }
 
@@ -448,7 +448,7 @@ class App {
 export default function CircularGallery({
   items,
   textColor = '#000',
-  borderRadius = 0.01,
+  borderRadius = 0,
   font = 'bold 30px Figtree',
   scrollSpeed = 2,
   scrollEase = 0.05
