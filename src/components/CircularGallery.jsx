@@ -292,8 +292,10 @@ class App {
     document.documentElement.classList.remove('no-js');
     this.container = container;
     this.scrollSpeed = scrollSpeed;
+    this.onSelect = onSelect;
     this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
     this.onCheckDebounce = debounce(this.onCheck, 200);
+    this.handleCanvasClick = this.handleCanvasClick.bind(this);
     this.createRenderer();
     this.createCamera();
     this.createScene();
@@ -302,6 +304,30 @@ class App {
     this.createMedias(items, textColor, borderRadius, font);
     this.update();
     this.addEventListeners();
+  }
+  
+  handleCanvasClick(e) {
+    if (!this.medias || !this.screen) return;
+    
+    const rect = this.gl.canvas.getBoundingClientRect();
+    const mouseX = ((e.clientX - rect.left) / this.screen.width) * 2 - 1;
+    const mouseY = -((e.clientY - rect.top) / this.screen.height) * 2 + 1;
+    
+    const centerMedia = this.medias.find(media => media.isCenter);
+    if (centerMedia && this.onSelect) {
+      const screenX = (centerMedia.plane.position.x / this.viewport.width) * 2;
+      const planeWidth = (centerMedia.plane.scale.x / this.viewport.width) * 2;
+      const planeHeight = (centerMedia.plane.scale.y / this.viewport.height) * 2;
+      
+      const isClickOnCenter = (
+        Math.abs(mouseX - screenX) < planeWidth / 2 &&
+        Math.abs(mouseY) < planeHeight / 2
+      );
+      
+      if (isClickOnCenter) {
+        this.onSelect(centerMedia.id);
+      }
+    }
   }
   createRenderer() {
     this.renderer = new Renderer({
@@ -312,6 +338,8 @@ class App {
     this.gl = this.renderer.gl;
     this.gl.clearColor(0, 0, 0, 0);
     this.container.appendChild(this.gl.canvas);
+    this.gl.canvas.style.cursor = 'pointer';
+    this.gl.canvas.addEventListener('click', this.handleCanvasClick);
   }
   createCamera() {
     this.camera = new Camera(this.gl);
@@ -429,6 +457,9 @@ class App {
     window.addEventListener('touchend', this.boundOnTouchUp);
   }
   destroy() {
+    if (this.gl && this.gl.canvas) {
+      this.gl.canvas.removeEventListener('click', this.handleCanvasClick);
+    }
     window.cancelAnimationFrame(this.raf);
     window.removeEventListener('resize', this.boundOnResize);
     window.removeEventListener('mousedown', this.boundOnTouchDown);
