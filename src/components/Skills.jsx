@@ -11,7 +11,14 @@ const skillsData = [
 export default function Skills() {
   return (
     <div className="mt-8 text-sm w-full">
-      <h2 className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 border-gray-200 pb-2">Skills</h2>
+      {/* <h2 className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 border-gray-200 pb-2">Skills</h2> */}
+      <EditableText
+        tag="h2"
+        className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 border-gray-200 pb-2"
+        value="Skills"
+        onUpdate={(text) => onUpdate({ ...section, content: text })}
+      />
+      
       {skillsData.map((skill, index) => (
         <SkillBar 
           key={index}
