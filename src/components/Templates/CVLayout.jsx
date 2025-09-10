@@ -27,10 +27,19 @@ function SortableBlock({ id, section, onUpdate, onRemove }) {
       ref={setNodeRef}
       style={style}
       {...attributes}
-      {...listeners}
-      className="cursor-grab"
+      className="cursor-grab relative group"
     >
-      <BlockComponent />
+      <div {...listeners} className="h-full">
+        <BlockComponent section={section} onUpdate={onUpdate} />
+      </div>
+      
+      <button
+        onClick={handleRemoveClick}
+        className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity text-xs w-6 h-6 flex items-center justify-center z-10"
+        title="Remove block"
+      >
+        ×
+      </button>
     </div>
   );
 }
