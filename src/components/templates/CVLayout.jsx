@@ -1,9 +1,11 @@
+import { useState, useRef } from "react";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { SortableContext, verticalListSortingStrategy, arrayMove, useSortable, } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { blocksMap } from "../Blocks/blocksMap";
+import { blocksTextsData } from "../Blocks/blocksTextsData";
 
-function SortableBlock({ id }) {
+function SortableBlock({ id, section, onUpdate, onRemove }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id });
 
@@ -15,60 +17,46 @@ function SortableBlock({ id }) {
   const BlockComponent = blocksMap[id];
   if (!BlockComponent) return null;
 
+  const handleRemoveClick = (e) => {
+    e.stopPropagation(); //Stop Drag
+    onRemove(id);
+  };
+
   return (
     <div
       ref={setNodeRef}
       style={style}
       {...attributes}
-      {...listeners}
-      className="cursor-grab"
+      className="cursor-grab relative group"
     >
-      <BlockComponent />
+      <div {...listeners} className="h-full">
+        <BlockComponent section={section} onUpdate={onUpdate} />
+      </div>
+      
+      <button
+        onClick={handleRemoveClick}
+        className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity text-xs w-6 h-6 flex items-center justify-center z-10"
+        title="Remove block"
+      >
+        ×
+      </button>
     </div>
   );
 }
 
-/**
- * CVLayout — drag&drop logic".
- * @param {object} props
- * @param {{
- *   id: string,
- *   blocks: string[],
- *   setBlocks: (fn) => void,
- *   className: string
- * }[]} props.areas
- * @param {string} [props.containerClass]
- */
-export default function CVLayout({ areas }) {
+export default function CVLayout({ areas, onBlockRemove }) {
+  const [blocksTexts, setBlocksTexts] = useState(blocksTextsData);
+
+  function handleUpdateBlock(id, newData) {
+    setBlocksTexts((prev) => ({
+      ...prev,
+      [id]: newData,
+    }));
+  }
+
   function handleDragEnd(event) {
     const { over, active } = event;
     if (!over) return;
-
-    // DELETE
-    if (over.id === "trash") {
-      const areaWithBlock = areas.find(area => area.blocks.includes(active.id));
-      if (areaWithBlock) {
-        areaWithBlock.setBlocks(areaWithBlock.blocks.filter(blockId => blockId !== active.id));
-      }
-      return;
-    }
-
-    // ADD
-    if (active.data.current?.type === "tool") {
-      const targetArea = areas.find(area => area.id === over.id || area.blocks.includes(over.id));
-      if (targetArea) {
-        const newBlockId = active.id;
-        const newBlocks = [...targetArea.blocks];
-        
-        // New index of place 
-        const overIndex = targetArea.blocks.indexOf(over.id);
-        const insertIndex = overIndex !== -1 ? overIndex : newBlocks.length;
-        
-        newBlocks.splice(insertIndex, 0, newBlockId);
-        targetArea.setBlocks(newBlocks);
-      }
-      return;
-    }
 
     // MOVE
     const activeArea = areas.find(area => area.blocks.includes(active.id));
@@ -80,18 +68,25 @@ export default function CVLayout({ areas }) {
       // In one area
       const oldIndex = activeArea.blocks.indexOf(active.id);
       const newIndex = overArea.blocks.indexOf(over.id);
-      activeArea.setBlocks(arrayMove(activeArea.blocks, oldIndex, newIndex));
+      if (activeArea.setBlocks && oldIndex !== newIndex) {
+        const newBlocks = arrayMove(activeArea.blocks, oldIndex, newIndex);
+        activeArea.setBlocks(newBlocks);
+      }
     } else {
-      // Beetween areas
-      const newActiveBlocks = activeArea.blocks.filter(block => block !== active.id);
-      const newOverBlocks = [...overArea.blocks];
-
+      // Between areas
       const overIndex = overArea.blocks.indexOf(over.id);
-      const insertIndex = overIndex !== -1 ? overIndex : newOverBlocks.length;
-      newOverBlocks.splice(insertIndex, 0, active.id);
+      const insertIndex = overIndex !== -1 ? overIndex : overArea.blocks.length;
 
-      activeArea.setBlocks(newActiveBlocks);
-      overArea.setBlocks(newOverBlocks);
+      if (activeArea.setBlocks && overArea.setBlocks) {
+        const newActiveBlocks = activeArea.blocks.filter(
+          (block) => block !== active.id
+        );
+        activeArea.setBlocks(newActiveBlocks);
+
+        const newOverBlocks = [...overArea.blocks];
+        newOverBlocks.splice(insertIndex, 0, active.id);
+        overArea.setBlocks(newOverBlocks);
+      }
     }
   }
 
@@ -100,8 +95,23 @@ export default function CVLayout({ areas }) {
       {areas.map((area) => (
         <div key={area.id} className={area.className}>
           <SortableContext items={area.blocks} strategy={verticalListSortingStrategy}>
-            {area.blocks.map((block) => (
-              <SortableBlock key={block} id={block} />
+            {area.blocks.map((blockId) => (
+              <SortableBlock
+                key={blockId}
+                id={blockId}
+                section={blocksTexts[blockId]}
+                onUpdate={(newData) => handleUpdateBlock(blockId, newData)}
+                onRemove={(id) => {
+                  console.log("Remove button clicked:", id);
+                  if (area.setBlocks) {
+                    const newBlocks = area.blocks.filter((block) => block !== id);
+                    area.setBlocks(newBlocks);
+                  }
+                  if (onBlockRemove) {
+                    onBlockRemove(id, area.id);
+                  }
+                }}
+              />
             ))}
           </SortableContext>
         </div>
