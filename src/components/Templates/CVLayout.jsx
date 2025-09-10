@@ -27,10 +27,13 @@ function SortableBlock({ id, section, onUpdate, onRemove }) {
       ref={setNodeRef}
       style={style}
       {...attributes}
-      className="cursor-grab relative group"
+      className="relative group"
     >
-      <div {...listeners} className="h-full">
-        <BlockComponent section={section} onUpdate={onUpdate} />
+      <div 
+        className="absolute absolute top-0 right-8 p-2 cursor-grab z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+        {...listeners}
+        title="Drag to move"
+      > ≡
       </div>
       
       <button
