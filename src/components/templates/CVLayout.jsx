@@ -21,6 +21,7 @@ function SortableBlock({ id }) {
       style={style}
       {...attributes}
       {...listeners}
+      className="cursor-grab"
     >
       <BlockComponent />
     </div>
@@ -43,21 +44,55 @@ export default function CVLayout({ areas }) {
     const { over, active } = event;
     if (!over) return;
 
-    const lists = Object.fromEntries(
-      areas.map((a) => [a.id, { blocks: a.blocks, setBlocks: a.setBlocks }])
-    );
-    
-    // Moving
-    if (active.data.current?.type !== "tool" && over.id !== "trash") {
-      for (const { blocks, setBlocks } of areas) {
-        if (blocks.includes(active.id) && blocks.includes(over.id)) {
-          const oldIndex = blocks.indexOf(active.id);
-          const newIndex = blocks.indexOf(over.id);
-          setBlocks(arrayMove(blocks, oldIndex, newIndex));
-        }
+    // DELETE
+    if (over.id === "trash") {
+      const areaWithBlock = areas.find(area => area.blocks.includes(active.id));
+      if (areaWithBlock) {
+        areaWithBlock.setBlocks(areaWithBlock.blocks.filter(blockId => blockId !== active.id));
       }
+      return;
     }
-    
+
+    // ADD
+    if (active.data.current?.type === "tool") {
+      const targetArea = areas.find(area => area.id === over.id || area.blocks.includes(over.id));
+      if (targetArea) {
+        const newBlockId = active.id;
+        const newBlocks = [...targetArea.blocks];
+        
+        // New index of place 
+        const overIndex = targetArea.blocks.indexOf(over.id);
+        const insertIndex = overIndex !== -1 ? overIndex : newBlocks.length;
+        
+        newBlocks.splice(insertIndex, 0, newBlockId);
+        targetArea.setBlocks(newBlocks);
+      }
+      return;
+    }
+
+    // MOVE
+    const activeArea = areas.find(area => area.blocks.includes(active.id));
+    const overArea = areas.find(area => area.blocks.includes(over.id));
+
+    if (!activeArea || !overArea) return;
+
+    if (activeArea.id === overArea.id) {
+      // In one area
+      const oldIndex = activeArea.blocks.indexOf(active.id);
+      const newIndex = overArea.blocks.indexOf(over.id);
+      activeArea.setBlocks(arrayMove(activeArea.blocks, oldIndex, newIndex));
+    } else {
+      // Beetween areas
+      const newActiveBlocks = activeArea.blocks.filter(block => block !== active.id);
+      const newOverBlocks = [...overArea.blocks];
+
+      const overIndex = overArea.blocks.indexOf(over.id);
+      const insertIndex = overIndex !== -1 ? overIndex : newOverBlocks.length;
+      newOverBlocks.splice(insertIndex, 0, active.id);
+
+      activeArea.setBlocks(newActiveBlocks);
+      overArea.setBlocks(newOverBlocks);
+    }
   }
 
   return (
