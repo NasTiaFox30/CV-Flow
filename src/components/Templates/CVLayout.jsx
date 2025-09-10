@@ -95,8 +95,23 @@ export default function CVLayout({ areas, onBlockRemove }) {
       {areas.map((area) => (
         <div key={area.id} className={area.className}>
           <SortableContext items={area.blocks} strategy={verticalListSortingStrategy}>
-            {area.blocks.map((block) => (
-              <SortableBlock key={block} id={block} />
+            {area.blocks.map((blockId) => (
+              <SortableBlock
+                key={blockId}
+                id={blockId}
+                section={blocksTexts[blockId]}
+                onUpdate={(newData) => handleUpdateBlock(blockId, newData)}
+                onRemove={(id) => {
+                  console.log("Remove button clicked:", id);
+                  if (area.setBlocks) {
+                    const newBlocks = area.blocks.filter((block) => block !== id);
+                    area.setBlocks(newBlocks);
+                  }
+                  if (onBlockRemove) {
+                    onBlockRemove(id, area.id);
+                  }
+                }}
+              />
             ))}
           </SortableContext>
         </div>
