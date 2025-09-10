@@ -34,6 +34,8 @@ function SortableBlock({ id, section, onUpdate, onRemove }) {
         title="Drag to move"
       > ≡
       </div>
+
+      <BlockComponent section={section} onUpdate={onUpdate} />
       
       <button
         onClick={handleRemoveClick}
