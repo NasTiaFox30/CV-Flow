@@ -18,7 +18,6 @@ function SortableBlock({ id, section, onUpdate, onRemove }) {
   if (!BlockComponent) return null;
 
   const handleRemoveClick = (e) => {
-    e.stopPropagation(); //Stop Drag
     onRemove(id);
   };
 
