@@ -11,3 +11,13 @@
 .circular-gallery:active {
     cursor: grabbing;
 }
+
+/* CVLayout Drag */
+.drag-handle {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.group:hover .drag-handle {
+    opacity: 1;
+}
