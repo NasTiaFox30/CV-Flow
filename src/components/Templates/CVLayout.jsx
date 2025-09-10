@@ -44,18 +44,16 @@ function SortableBlock({ id, section, onUpdate, onRemove }) {
   );
 }
 
-/**
- * CVLayout — drag&drop logic".
- * @param {object} props
- * @param {{
- *   id: string,
- *   blocks: string[],
- *   setBlocks: (fn) => void,
- *   className: string
- * }[]} props.areas
- * @param {string} [props.containerClass]
- */
-export default function CVLayout({ areas }) {
+export default function CVLayout({ areas, onBlockRemove }) {
+  const [blocksTexts, setBlocksTexts] = useState(blocksTextsData);
+
+  function handleUpdateBlock(id, newData) {
+    setBlocksTexts((prev) => ({
+      ...prev,
+      [id]: newData,
+    }));
+  }
+
   function handleDragEnd(event) {
     const { over, active } = event;
     if (!over) return;
