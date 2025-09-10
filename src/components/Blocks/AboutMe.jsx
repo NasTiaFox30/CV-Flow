@@ -1,27 +1,19 @@
-import EditableText from "../EditableField"; 
-  
-export default function AboutMe() {
+import EditableText from "../EditableField";
+
+export default function AboutMe({ section, onUpdate }) {
   return (
     <div className="mb-6">
-      {/* <h2 className="text-xl font-bold uppercase border-b pb-2 mb-4">ABOUT ME</h2> */}
       <EditableText
         tag="h2"
         className="text-xl font-bold uppercase border-b pb-2 mb-4"
-        value="ABOUT ME"
-        onUpdate={(text) => onUpdate({ ...section, content: text })}
-      /> 
-
-      {/* <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed
-        euismod magna.
-      </p> */}
+        value={section.title}
+        onUpdate={(text) => onUpdate({ ...section, title: text })}
+      />
       <EditableText
         tag="p"
-        className=""
-        value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed
-        euismod magna."
+        value={section.content}
         onUpdate={(text) => onUpdate({ ...section, content: text })}
-      /> 
+      />
     </div>
   );
-};
+}
