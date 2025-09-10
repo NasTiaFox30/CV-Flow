@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { SortableContext, verticalListSortingStrategy, arrayMove, useSortable, } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -18,7 +18,6 @@ function SortableBlock({ id, section, onUpdate, onRemove }) {
   if (!BlockComponent) return null;
 
   const handleRemoveClick = (e) => {
-    e.stopPropagation(); //Stop Drag
     onRemove(id);
   };
 
@@ -27,11 +26,16 @@ function SortableBlock({ id, section, onUpdate, onRemove }) {
       ref={setNodeRef}
       style={style}
       {...attributes}
-      className="cursor-grab relative group"
+      className="relative group"
     >
-      <div {...listeners} className="h-full">
-        <BlockComponent section={section} onUpdate={onUpdate} />
+      <div 
+        className="absolute absolute top-0 right-8 p-2 cursor-grab z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+        {...listeners}
+        title="Drag to move"
+      > ≡
       </div>
+
+      <BlockComponent section={section} onUpdate={onUpdate} />
       
       <button
         onClick={handleRemoveClick}
