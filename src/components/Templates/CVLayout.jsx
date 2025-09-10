@@ -96,18 +96,25 @@ export default function CVLayout({ areas }) {
       // In one area
       const oldIndex = activeArea.blocks.indexOf(active.id);
       const newIndex = overArea.blocks.indexOf(over.id);
-      activeArea.setBlocks(arrayMove(activeArea.blocks, oldIndex, newIndex));
+      if (activeArea.setBlocks && oldIndex !== newIndex) {
+        const newBlocks = arrayMove(activeArea.blocks, oldIndex, newIndex);
+        activeArea.setBlocks(newBlocks);
+      }
     } else {
-      // Beetween areas
-      const newActiveBlocks = activeArea.blocks.filter(block => block !== active.id);
-      const newOverBlocks = [...overArea.blocks];
-
+      // Between areas
       const overIndex = overArea.blocks.indexOf(over.id);
-      const insertIndex = overIndex !== -1 ? overIndex : newOverBlocks.length;
-      newOverBlocks.splice(insertIndex, 0, active.id);
+      const insertIndex = overIndex !== -1 ? overIndex : overArea.blocks.length;
 
-      activeArea.setBlocks(newActiveBlocks);
-      overArea.setBlocks(newOverBlocks);
+      if (activeArea.setBlocks && overArea.setBlocks) {
+        const newActiveBlocks = activeArea.blocks.filter(
+          (block) => block !== active.id
+        );
+        activeArea.setBlocks(newActiveBlocks);
+
+        const newOverBlocks = [...overArea.blocks];
+        newOverBlocks.splice(insertIndex, 0, active.id);
+        overArea.setBlocks(newOverBlocks);
+      }
     }
   }
 
