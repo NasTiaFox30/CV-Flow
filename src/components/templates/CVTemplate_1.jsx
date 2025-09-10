@@ -13,24 +13,35 @@ export default function CVTemplate_1({ config }) {
         style={{width: "210mm", height: "297mm"}} // A4 format wrap
       >
         {/* Left side */}
-        <div className="p-8 bg-stone-800 text-white col-span-1 flex flex-col items-center">
-          <AvatarFrame />
-          <ContactInfo />
-          <Skills />
-          <Hobbies />
-        </div>
+        <CVLayout
+          areas={[
+            {
+              id: "left-top-area",
+              className: "p-8 bg-stone-800 text-white col-span-1 flex flex-col",
+              blocks: leftTopBlocks,
+              setBlocks: setLeftBlocks,
+            },
+          ]}
+        />
 
         {/* Right side */}
         <div className="col-span-2 flex flex-col">
-          <div className="mt-8 p-8 w-full bg-stone-100">
-            <HeaderSections />
-            <AboutMe />
-          </div>
-          <div className="m-8">
-            <Education />
-            <WorkExperience />
-          </div>
-          
+          <CVLayout
+            areas={[
+              {
+                id: "right-top-area",
+                className: "mt-8 p-8 w-full bg-stone-100",
+                blocks: rightTopBlocks,
+                setBlocks: setRightTopBlocks,
+              },
+              {
+                id: "right-bottom-area",
+                className: "m-8",
+                blocks: rightBottomBlocks,
+                setBlocks: setRightBottomBlocks,
+              },
+            ]}
+          />
         </div>
       </div>
     </div>
