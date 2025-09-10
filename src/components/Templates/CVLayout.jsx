@@ -60,32 +60,6 @@ export default function CVLayout({ areas }) {
     const { over, active } = event;
     if (!over) return;
 
-    // DELETE
-    if (over.id === "trash") {
-      const areaWithBlock = areas.find(area => area.blocks.includes(active.id));
-      if (areaWithBlock) {
-        areaWithBlock.setBlocks(areaWithBlock.blocks.filter(blockId => blockId !== active.id));
-      }
-      return;
-    }
-
-    // ADD
-    if (active.data.current?.type === "tool") {
-      const targetArea = areas.find(area => area.id === over.id || area.blocks.includes(over.id));
-      if (targetArea) {
-        const newBlockId = active.id;
-        const newBlocks = [...targetArea.blocks];
-        
-        // New index of place 
-        const overIndex = targetArea.blocks.indexOf(over.id);
-        const insertIndex = overIndex !== -1 ? overIndex : newBlocks.length;
-        
-        newBlocks.splice(insertIndex, 0, newBlockId);
-        targetArea.setBlocks(newBlocks);
-      }
-      return;
-    }
-
     // MOVE
     const activeArea = areas.find(area => area.blocks.includes(active.id));
     const overArea = areas.find(area => area.blocks.includes(over.id));
