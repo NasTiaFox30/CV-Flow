@@ -1,7 +1,7 @@
 export const blocksTextsData = {
   AboutMe: {
     title: "ABOUT ME",
-    content: "Lorem ipsum dolor sit amet..."
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed euismod magna."
   },
   Education: {
     title: "EDUCATION",
