@@ -5,7 +5,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { blocksMap } from "../Blocks/blocksMap";
 import { blocksTextsData } from "../Blocks/blocksTextsData";
 
-function SortableBlock({ id }) {
+function SortableBlock({ id, section, onUpdate, onRemove }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id });
 
