@@ -1,10 +1,16 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 
 export default function EditableText({ tag: Tag, className, value, onUpdate }) {
   const ref = useRef(null);
 
-  const handleInput = useCallback(() => {
-    if (onUpdate) {
+  useEffect(() => {
+    if (ref.current && ref.current.innerText !== value) {
+      ref.current.innerText = value;
+    }
+  }, [value]);
+
+  const handleBlur = useCallback(() => {
+    if (onUpdate && ref.current) {
       onUpdate(ref.current.innerText);
     }
   }, [onUpdate]);
@@ -14,11 +20,7 @@ export default function EditableText({ tag: Tag, className, value, onUpdate }) {
       ref={ref}
       className={className}
       contentEditable
-      suppressContentEditableWarning
-      onBlur={handleInput}
-      onInput={handleInput}
-    >
-      {value}
-    </Tag>
+      onBlur={handleBlur}
+    />
   );
 }
