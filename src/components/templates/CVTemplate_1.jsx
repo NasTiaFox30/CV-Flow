@@ -1,13 +1,11 @@
-import HeaderSections from "../Blocks/HeaderSections";
-import AvatarFrame from "../Blocks/AvatarFrame";
-import ContactInfo from "../Blocks/ContactInfo";
-import AboutMe from "../Blocks/AboutMe";
-import Education from "../Blocks/Education";
-import WorkExperience from "../Blocks/WorkExperience";
-import Skills from "../Blocks/Skills";
-import Hobbies from "../Blocks/Hobbies";
+import { useState } from "react";
+import CVLayout from "./CVLayout";
 
-export default function CVTemplate() {
+export default function CVTemplate_1({ config }) {
+  const [leftTopBlocks, setLeftBlocks] = useState(config.left_top);
+  const [rightTopBlocks, setRightTopBlocks] = useState(config.right_top);
+  const [rightBottomBlocks, setRightBottomBlocks] = useState(config.right_bottom);
+
   return (
     <div className="bg-gray-100 flex justify-center py-8">
       <div
