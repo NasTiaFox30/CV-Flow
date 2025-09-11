@@ -14,13 +14,29 @@ export const blocksTextsData = {
     }],
     defaultItem:
     {
-      period: "New periods",
+      period: "New period",
       degree: "New degree",
       university: "New University",
-      description: "New description"
+      description: "New description..."
     }
   },
-  
+  WorkExperience: {
+    title: "WORK EXPERIENCE",
+    items: [
+      {
+        period: "Jan 2020 – Mar 2024",
+        position: "Job Position",
+        company: "COMPANY OF LOREM IPSUM",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+      }
+    ],
+    defaultItem: {
+      period: "New period",
+      position: "New position",
+      company: "New company name",
+      description: "New description..."
+    }
+  },
 
 
 
