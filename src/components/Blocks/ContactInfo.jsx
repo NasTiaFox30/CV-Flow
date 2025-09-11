@@ -19,33 +19,16 @@ const iconsList = {
 };
 
 export default function ContactInfo({ section, onUpdate }) {
+  const [editingIconIndex, setEditingIconIndex] = useState(null);
   const { addItem, updateItem, removeItem } = useBlockActions(section, onUpdate);
 
   const addNewItem = () => addItem('ContactInfo');
   const handleUpdateItem = (index, field, value) => updateItem(index, field, value);
   const handleRemoveItem = (index) => removeItem(index);
 
-  const getContactType = (index) => {
-    const types = ['phone', 'email', 'address'];
-    return types[index] || 'other';
-  };
-
-  const getIcon = (type) => {
-    switch (type) {
-      case 'phone': return Icon_phone;
-      case 'email': return Icon_email;
-      case 'address': return Icon_adress;
-      default: return Icon_phone;
-    }
-  };
-
-  const getPlaceholder = (type) => {
-    switch (type) {
-      case 'phone': return "+0123 4XXX 78901";
-      case 'email': return "yourname@mail.com";
-      case 'address': return "Your Street Address\nTown/City, zip code";
-      default: return "Новий контакт";
-    }
+  const handleIconChange = (index, newIconKey) => {
+    updateItem(index, 'icon', newIconKey);
+    setEditingIconIndex(null);
   };
 
   return (
@@ -59,18 +42,37 @@ export default function ContactInfo({ section, onUpdate }) {
       
       <div className="space-y-4 text-gray-200">
         {section.items.map((item, index) => {
-          const contactType = getContactType(index);
-          const icon = getIcon(contactType);
-          const placeholder = getPlaceholder(contactType);
+          const iconKey = item.icon;
+          const icon = iconsList[iconKey];
           
           return (
-            <div key={index} className="flex items-center relative group item">
-              <DelButton 
-                onClick={() => handleRemoveItem(index)}
-                className=""
-              />
+            <div key={index} className="flex items-center relative group">
+              <DelButton onClick={() => handleRemoveItem(index)} />
               
-              <img src={icon} className="h-5 w-5 mr-3" alt={contactType} />
+              <div className="relative">
+                <button
+                  onClick={() => setEditingIconIndex(editingIconIndex === index ? null : index)}
+                  className="h-5 w-5 mr-3 flex items-center justify-center hover:bg-gray-400 rounded transition-colors"
+                >
+                  <img src={icon} alt={iconKey} />
+                </button>
+                
+                {editingIconIndex === index && (
+                  <div className="absolute right-10 top-0 bg-stone-600 border rounded shadow-lg z-20 p-2 grid grid-6 gap-2">
+                    {Object.entries(iconsList).map(([key, iconSrc]) => (
+                    <button
+                      key={key}
+                      onClick={() => handleIconChange(index, key)}
+                      className="p-1 h-9 w-9 hover:bg-stone-500 rounded transition-colors"
+                      title={key}
+                    >
+                      <img src={iconSrc} alt={key} className="h-6 w-6" />
+                    </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+              
               <EditableText
                 tag="p"
                 className="flex-1"
