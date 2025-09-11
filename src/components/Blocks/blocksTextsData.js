@@ -61,6 +61,31 @@ export const blocksTextsData = {
       value: "new contact"
     }
   },
+   Skills: {
+    title: "Skills",
+    items: [
+      {
+        name: "Photoshop",
+        level: 90
+      },
+      {
+        name: "Illustrator",
+        level: 75
+      },
+      {
+        name: "Figma",
+        level: 85
+      },
+      {
+        name: "React",
+        level: 60
+      }
+    ],
+    defaultItem: {
+      name: "New skill",
+      level: 50
+    }
+  },
 
 
 
