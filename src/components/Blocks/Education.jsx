@@ -1,65 +1,64 @@
 import EditableText from "../EditableField";
+import AddButton from "../AddField";
+import DelButton from "../DelField";
+import { useBlockActions } from "../hooks/useBlockActions";
 
-export default function Education() {
-  const educationData = [
-    {
-      period: "Jan 2017 – Mar 2020",
-      university: "UNIVERSITY OF LOREM IPSUM",
-      degree: "Your Degree Name Here",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
-    },
-  ];
+export default function Education({ section, onUpdate }) {
+  const { addItem, updateItem, removeItem } = useBlockActions(section, onUpdate);
+
+  const addNewItem = () => addItem('Education');
+  const handleUpdateItem = (index, field, value) => updateItem(index, field, value);
+  const handleRemoveItem = (index) => removeItem(index);
 
   return (
     <div className="mb-6">
-      {/* <h2 className="text-xl font-bold uppercase border-b pb-2 mb-4">EDUCATION</h2> */}
       <EditableText
         tag="h2"
         className="text-xl font-bold uppercase border-b pb-2 mb-4"
-        value="EDUCATION"
-        onUpdate={(text) => onUpdate({ ...section, content: text })}
-      /> 
+        value={section.title}
+        onUpdate={(text) => onUpdate({ ...section, title: text })}
+      />
 
       <div className="space-y-4">
-        {educationData.map((edu, index) => (
-          <div key={index} className="grid grid-cols-2 gap-4">
+        {section.items.map((item, index) => (
+          <div key={index} className="grid grid-cols-2 gap-4 relative group item">
+            
+            <DelButton onClick={() => handleRemoveItem(index)} />
+            
             <div>
-              {/* <p className="font-semibold">{edu.period}</p> */}
               <EditableText
                 tag="p"
                 className="font-semibold"
-                value={edu.period}
-                onUpdate={(text) => onUpdate({ ...section, content: text })}
-              /> 
-              {/* <p className="text-gray-500">{edu.degree}</p> */}
+                value={item.period}
+                onUpdate={(text) => handleUpdateItem(index, 'period', text)}
+              />
               <EditableText
                 tag="p"
                 className="text-gray-500"
-                value={edu.degree}
-                onUpdate={(text) => onUpdate({ ...section, content: text })}
-              /> 
+                value={item.degree}
+                onUpdate={(text) => handleUpdateItem(index, 'degree', text)}
+              />
             </div>
 
             <div>
-              {/* <p className="font-bold">{edu.university}</p> */}
               <EditableText
                 tag="p"
                 className="font-bold"
-                value={edu.university}
-                onUpdate={(text) => onUpdate({ ...section, content: text })}
-              /> 
-              {/* <p className="text-gray-600 text-sm">{edu.description}</p> */}
+                value={item.university}
+                onUpdate={(text) => handleUpdateItem(index, 'university', text)}
+              />
               <EditableText
                 tag="p"
                 className="text-gray-600 text-sm"
-                value={edu.description}
-                onUpdate={(text) => onUpdate({ ...section, content: text })}
+                value={item.description}
+                onUpdate={(text) => handleUpdateItem(index, 'description', text)}
               />
             </div>
           </div>
         ))}
       </div>
+
+      <AddButton onClick={addNewItem}></AddButton>
     </div>
   );
 }
