@@ -58,22 +58,39 @@ export default function CVLayout({ areas, onBlockRemove }) {
     const { over, active } = event;
     if (!over) return;
 
-    // MOVE
-    const activeArea = areas.find(area => area.blocks.includes(active.id));
-    const overArea = areas.find(area => area.blocks.includes(over.id));
+    const activeArea = areas.find((area) => area.blocks.includes(active.id));
+    const overArea = areas.find((area) => area.blocks.includes(over.id));
+    if (!overArea) return;
 
-    if (!activeArea || !overArea) return;
+    const isNewBlock = !areas.some((area) => area.blocks.includes(active.id));
+    if (isNewBlock) {
+      const insertIndex = overArea.blocks.indexOf(over.id);
+      const newBlocks = [...overArea.blocks];
+      newBlocks.splice(insertIndex !== -1 ? insertIndex : newBlocks.length, 0, active.id);
+      overArea.setBlocks(newBlocks);
 
-    if (activeArea.id === overArea.id) {
-      // In one area
+      setBlocksTexts((prev) => {
+        if (!prev[active.id] && blocksTextsData[active.id]) {
+          return {
+            ...prev,
+            [active.id]: blocksTextsData[active.id],
+          };
+        }
+        return prev;
+      });
+
+      return;
+    }
+
+    if (activeArea && activeArea.id === overArea.id) {
       const oldIndex = activeArea.blocks.indexOf(active.id);
       const newIndex = overArea.blocks.indexOf(over.id);
       if (activeArea.setBlocks && oldIndex !== newIndex) {
         const newBlocks = arrayMove(activeArea.blocks, oldIndex, newIndex);
         activeArea.setBlocks(newBlocks);
       }
-    } else {
-      // Between areas
+    }
+    else if (activeArea && overArea) {
       const overIndex = overArea.blocks.indexOf(over.id);
       const insertIndex = overIndex !== -1 ? overIndex : overArea.blocks.length;
 
