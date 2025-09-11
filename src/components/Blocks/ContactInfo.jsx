@@ -46,7 +46,7 @@ export default function ContactInfo({ section, onUpdate }) {
           const icon = iconsList[iconKey];
           
           return (
-            <div key={index} className="flex items-center relative group">
+            <div key={index} className="flex items-center relative group item">
               <DelButton onClick={() => handleRemoveItem(index)} />
               
               <div className="relative">
