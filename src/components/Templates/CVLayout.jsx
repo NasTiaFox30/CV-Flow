@@ -17,10 +17,6 @@ function SortableBlock({ id, section, onUpdate, onRemove }) {
   const BlockComponent = blocksMap[id];
   if (!BlockComponent) return null;
 
-  const handleRemoveClick = (e) => {
-    onRemove(id);
-  };
-
   return (
     <div
       ref={setNodeRef}
