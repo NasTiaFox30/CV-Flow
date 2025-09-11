@@ -3,7 +3,7 @@ export default function DelButton({ onClick, children = "🗑️", className = "
     <button
       onClick={onClick}
       title={title}
-      className={`absolute -right-2 delbutton ${className}`}
+      className={`absolute inset-y-0 -right-5 delbutton ${className}`}
     >
       {children}
     </button>
