@@ -22,13 +22,17 @@
     opacity: 1;
 }
 
-/* AddButton */
-.addbutton {
+/* Add|Del Button */
+.addbutton,
+.delbutton {
     opacity: 0;
     transition: opacity 0.2s;
 }
 
+.item:hover .delbutton {
+    opacity: 1;
+}
+
 .group:hover .addbutton {
     opacity: 1;
-
 }
