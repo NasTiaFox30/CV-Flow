@@ -2,8 +2,11 @@ import EditableText from "../EditableField";
 import AddButton from "../AddField";
 import DelButton from "../DelField";
 import { useBlockActions } from "../hooks/useBlockActions";
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 export default function Education({ section, onUpdate }) {
+  const [isHovered, setIsHovered] = useState(false);
   const { addItem, updateItem, removeItem } = useBlockActions(section, onUpdate);
 
   const addNewItem = () => addItem('Education');
@@ -11,7 +14,10 @@ export default function Education({ section, onUpdate }) {
   const handleRemoveItem = (index) => removeItem(index);
 
   return (
-    <div className="mb-6">
+    <div className="mb-6"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <EditableText
         tag="h2"
         className="text-xl font-bold uppercase border-b pb-2 mb-4"
@@ -58,7 +64,9 @@ export default function Education({ section, onUpdate }) {
         ))}
       </div>
 
-      <AddButton onClick={addNewItem}></AddButton>
+      <AnimatePresence>
+        {isHovered && <AddButton onClick={addNewItem} />}
+      </AnimatePresence>
     </div>
   );
 }

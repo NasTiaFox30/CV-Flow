@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AnimatePresence } from "framer-motion";
 import EditableText from "../EditableField";
 import AddButton from "../AddField";
 import DelButton from "../DelField";
@@ -19,6 +20,7 @@ const iconsList = {
 };
 
 export default function ContactInfo({ section, onUpdate }) {
+  const [isHovered, setIsHovered] = useState(false);
   const [editingIconIndex, setEditingIconIndex] = useState(null);
   const { addItem, updateItem, removeItem } = useBlockActions(section, onUpdate);
 
@@ -32,7 +34,10 @@ export default function ContactInfo({ section, onUpdate }) {
   };
 
   return (
-    <div className="mt-8 text-sm w-full">
+    <div className="mt-8 text-sm w-full"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <EditableText
         tag="h2"
         className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 border-gray-200 pb-2"
@@ -84,7 +89,9 @@ export default function ContactInfo({ section, onUpdate }) {
         })}
       </div>
 
-      <AddButton onClick={addNewItem} className="mt-4"></AddButton>
+      <AnimatePresence>
+        {isHovered && <AddButton onClick={addNewItem} />}
+      </AnimatePresence>  
     </div>
   );
 }
