@@ -37,6 +37,30 @@ export const blocksTextsData = {
       description: "New description..."
     }
   },
+  ContactInfo: {
+    title: "Contact",
+    items: [
+      {
+        type: "phone",
+        icon: "phone",
+        value: "+0123 4XXX 78901"
+      },
+      {
+        type: "email",
+        icon: "email",
+        value: "yourname@mail.com"
+      },
+      {
+        type: "address",
+        icon: "address",
+        value: "Your Street Address\nTown/City, zip code"
+      }
+    ],
+    defaultItem: {
+      type: "other",
+      value: "new contact"
+    }
+  },
 
 
 
