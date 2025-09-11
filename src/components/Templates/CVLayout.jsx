@@ -34,7 +34,7 @@ function SortableBlock({ id, section, onUpdate, onRemove }) {
       <BlockComponent section={section} onUpdate={onUpdate} />
       
       <button
-        onClick={handleRemoveClick}
+        onClick={() => onRemove(id)}
         className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity text-xs w-6 h-6 flex items-center justify-center z-10"
         title="Remove block"
       >
