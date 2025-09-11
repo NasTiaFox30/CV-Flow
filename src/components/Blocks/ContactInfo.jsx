@@ -4,7 +4,17 @@ import DelButton from "../DelField";
 import Icon_phone from "../../assets/icons/phone.svg";
 import Icon_email from "../../assets/icons/email.svg";
 import Icon_adress from "../../assets/icons/adress.svg";
-import { useBlockActions } from "../hooks/useBlockActions";
+import Icon_github from "../../assets/icons/github.svg";
+import Icon_linkedin from "../../assets/icons/linkedin.svg";
+import Icon_website from "../../assets/icons/website.svg";
+const iconsList = {
+  phone: Icon_phone,
+  email: Icon_email,
+  address: Icon_adress,
+  github: Icon_github,
+  linkedin: Icon_linkedin,
+  website: Icon_website,
+};
 
 export default function ContactInfo({ section, onUpdate }) {
   const { addItem, updateItem, removeItem } = useBlockActions(section, onUpdate);
