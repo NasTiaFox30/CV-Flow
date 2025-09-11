@@ -21,3 +21,14 @@
 .group:hover .drag-handle {
     opacity: 1;
 }
+
+/* AddButton */
+.addbutton {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.group:hover .addbutton {
+    opacity: 1;
+
+}
