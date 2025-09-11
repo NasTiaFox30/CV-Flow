@@ -86,6 +86,17 @@ export const blocksTextsData = {
       level: 50
     }
   },
+   Hobbies: {
+    title: "HOBBIES",
+    items: [
+      { name: "Graphic Design" },
+      { name: "Photography" },
+      { name: "Videography" }
+    ],
+    defaultItem: {
+      name: "New hobbie"
+    }
+  },
 
 
 
