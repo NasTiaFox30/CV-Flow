@@ -1,31 +1,41 @@
 import EditableText from "../EditableField";
+import AddButton from "../AddField";
+import DelButton from "../DelField";
 import SkillBar from "./SkillBar";
+import { useBlockActions } from "../hooks/useBlockActions";
 
-const skillsData = [
-  { name: "Photoshop", level: 90 },
-  { name: "Illustrator", level: 75 },
-  { name: "Figma", level: 85 },
-  { name: "React", level: 60 }
-];
+export default function Skills({ section, onUpdate }) {
+  const { addItem, updateItem, removeItem } = useBlockActions(section, onUpdate);
 
-export default function Skills() {
+  const addNewItem = () => addItem('Skills');
+  const handleUpdateItem = (index, field, value) => updateItem(index, field, value);
+  const handleRemoveItem = (index) => removeItem(index);
+
   return (
     <div className="mt-8 text-sm w-full">
-      {/* <h2 className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 border-gray-200 pb-2">Skills</h2> */}
       <EditableText
         tag="h2"
         className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 border-gray-200 pb-2"
-        value="Skills"
-        onUpdate={(text) => onUpdate({ ...section, content: text })}
+        value={section.title || "Skills"}
+        onUpdate={(text) => onUpdate({ ...section, title: text })}
       />
       
-      {skillsData.map((skill, index) => (
-        <SkillBar 
-          key={index}
-          name={skill.name} 
-          level={skill.level} 
-        />
-      ))}
+      <div className="space-y-2">
+        {section.items.map((skill, index) => (
+          <div key={index} className="relative group item">
+            <DelButton onClick={() => handleRemoveItem(index)} />
+            
+            <SkillBar 
+              name={skill.name} 
+              level={skill.level}
+              onNameChange={(text) => handleUpdateItem(index, 'name', text)}
+              onLevelChange={(value) => handleUpdateItem(index, 'level', value)}
+            />
+          </div>
+        ))}
+      </div>
+
+      <AddButton onClick={addNewItem} className="mt-4"></AddButton>
     </div>
   );
-};
+}
