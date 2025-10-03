@@ -19,7 +19,6 @@ export const blockStyles = {
       hobbyText: "ml-4 pl-2"
     },
      AboutMe: {
-      container: "mb-6",
       title: "text-xl font-bold uppercase border-b-2 pb-2 mb-4",
       content: "text-gray-700 leading-relaxed"
     },
@@ -43,7 +42,6 @@ export const blockStyles = {
       hobbyText: "list-none text-stone-600"
     },
      AboutMe: {
-      container: "mb-8",
       title: "text-xl font-bold uppercase mb-4 text-stone-700",
       content: "text-stone-600 leading-relaxed"
     },
