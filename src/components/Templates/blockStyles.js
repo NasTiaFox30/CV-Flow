@@ -67,5 +67,27 @@ export const blockStyles = {
       title: "text-xl font-bold uppercase mb-4 text-stone-700",
       content: "text-stone-600 leading-relaxed"
     },
+     Education: {
+      title: "text-xl font-bold my-6",
+      itemsContainer: "space-y-4",
+      item: "grid grid-cols-5 gap-4 relative group item",
+      leftColumn: "col-span-2",
+      period: "font-semibold text-gray-50",
+      degree: "text-gray-300 text-xs",
+      rightColumn: "col-span-3",
+      university: "font-bold text-gray-50 mb-2",
+      description: "text-gray-300 text-xs"
+    },
+     WorkExperience: {
+      title: "text-xl font-bold my-6",
+      itemsContainer: "space-y-6",
+      item: "grid grid-cols-5 gap-6 relative group item",
+      leftColumn: "col-span-2",
+      period: "font-semibold text-gray-50",
+      position: "text-gray-300 text-xs",
+      rightColumn: "col-span-3",
+      company: "font-bold text-gray-50",
+      description: "text-gray-300 text-xs"
+    },
   },
 };
