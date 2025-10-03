@@ -58,7 +58,7 @@ export default function ContactInfo({ section, onUpdate, theme }) {
                   onClick={() => setEditingIconIndex(editingIconIndex === index ? null : index)}
                   className={styles.iconButton}
                 >
-                  <IconComponent className={styles.iconColor} />
+                  <IconComponent className={styles.icons} />
                 </button>
 
                 {editingIconIndex === index && (
@@ -70,7 +70,7 @@ export default function ContactInfo({ section, onUpdate, theme }) {
                         className="p-1 h-9 w-9 hover:bg-stone-500 rounded transition-colors"
                         title={key}
                       >
-                        <Icon className={styles.iconColor} />
+                        <Icon className={styles.icons} />
                       </button>
                     ))}
                   </div>
