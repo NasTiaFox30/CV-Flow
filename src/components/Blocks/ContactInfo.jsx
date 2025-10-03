@@ -6,12 +6,8 @@ import DelButton from "../DelField";
 import { useBlockActions } from "../hooks/useBlockActions";
 import { blockStyles } from "../Templates/blockStyles";
 
-import Icon_phone from "../../assets/icons/phone.svg";
-import Icon_email from "../../assets/icons/email.svg";
-import Icon_adress from "../../assets/icons/adress.svg";
-import Icon_github from "../../assets/icons/github.svg";
-import Icon_linkedin from "../../assets/icons/linkedin.svg";
-import Icon_website from "../../assets/icons/website.svg";
+import { Icon_phone, Icon_email, Icon_adress, Icon_github, Icon_linkedin, Icon_website } from "../../assets/icons/IconsComponents.jsx";
+
 const iconsList = {
   phone: Icon_phone,
   email: Icon_email,
@@ -51,8 +47,7 @@ export default function ContactInfo({ section, onUpdate, theme }) {
       
       <div className="space-y-4">
         {section.items.map((item, index) => {
-          const iconKey = item.icon;
-          const icon = iconsList[iconKey];
+          const IconComponent = iconsList[item.icon];
           
           return (
             <div key={index} className={styles.item}>
@@ -63,20 +58,20 @@ export default function ContactInfo({ section, onUpdate, theme }) {
                   onClick={() => setEditingIconIndex(editingIconIndex === index ? null : index)}
                   className={styles.iconButton}
                 >
-                  <img src={icon} alt={iconKey} />
+                  <IconComponent className={styles.iconColor} />
                 </button>
 
                 {editingIconIndex === index && (
                   <div className="absolute right-10 top-0 bg-stone-600 border rounded shadow-lg z-20 p-2 grid grid-6 gap-2">
-                    {Object.entries(iconsList).map(([key, iconSrc]) => (
-                    <button
-                      key={key}
-                      onClick={() => handleIconChange(index, key)}
-                      className="p-1 h-9 w-9 hover:bg-stone-500 rounded transition-colors"
-                      title={key}
-                    >
-                      <img src={iconSrc} alt={key} className="h-6 w-6" />
-                    </button>
+                    {Object.entries(iconsList).map(([key, Icon]) => (
+                      <button
+                        key={key}
+                        onClick={() => handleIconChange(index, key)}
+                        className="p-1 h-9 w-9 hover:bg-stone-500 rounded transition-colors"
+                        title={key}
+                      >
+                        <Icon className={styles.iconColor} />
+                      </button>
                     ))}
                   </div>
                 )}
