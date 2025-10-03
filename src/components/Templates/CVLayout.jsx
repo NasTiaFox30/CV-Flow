@@ -5,7 +5,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { blocksMap } from "../Blocks/blocksMap";
 import { blocksTextsData } from "../Blocks/blocksTextsData";
 
-function SortableBlock({ id, section, onUpdate, onRemove }) {
+function SortableBlock({ id, section, onUpdate, onRemove, theme }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id });
 
@@ -32,8 +32,8 @@ function SortableBlock({ id, section, onUpdate, onRemove }) {
       > ≡
       </div>
 
-      <BlockComponent section={section} onUpdate={onUpdate} />
-      
+      <BlockComponent section={section} onUpdate={onUpdate} theme={theme} />
+
       <button
         onClick={() => onRemove(id)}
         className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity text-xs w-6 h-6 flex items-center justify-center z-10"
@@ -45,7 +45,7 @@ function SortableBlock({ id, section, onUpdate, onRemove }) {
   );
 }
 
-export default function CVLayout({ areas, onBlockRemove }) {
+export default function CVLayout({ areas, onBlockRemove, theme }) {
   const [blocksTexts, setBlocksTexts] = useState(blocksTextsData);
 
   function handleUpdateBlock(id, newData) {
@@ -120,7 +120,6 @@ export default function CVLayout({ areas, onBlockRemove }) {
                 section={blocksTexts[blockId]}
                 onUpdate={(newData) => handleUpdateBlock(blockId, newData)}
                 onRemove={(id) => {
-                  console.log("Remove button clicked:", id);
                   if (area.setBlocks) {
                     const newBlocks = area.blocks.filter((block) => block !== id);
                     area.setBlocks(newBlocks);
@@ -129,6 +128,7 @@ export default function CVLayout({ areas, onBlockRemove }) {
                     onBlockRemove(id, area.id);
                   }
                 }}
+                theme={theme}
               />
             ))}
           </SortableContext>
