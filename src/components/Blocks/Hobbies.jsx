@@ -32,6 +32,7 @@ export default function Hobbies({ section, onUpdate }) {
             
             <EditableText
               tag="li"
+              className={"ml-4 pl-2"}
               value={hobby.name || hobby.value || hobby}
               onUpdate={(text) => handleUpdateItem(index, 'name', text)}
             />
