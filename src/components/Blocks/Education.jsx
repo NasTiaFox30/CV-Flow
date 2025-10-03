@@ -4,10 +4,13 @@ import DelButton from "../DelField";
 import { useBlockActions } from "../hooks/useBlockActions";
 import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { blockStyles } from "../Templates/blockStyles";
 
-export default function Education({ section, onUpdate }) {
+export default function Education({ section, onUpdate, theme }) {
   const [isHovered, setIsHovered] = useState(false);
   const { addItem, updateItem, removeItem } = useBlockActions(section, onUpdate);
+
+  const styles = blockStyles[theme]?.Education || {};
 
   const addNewItem = () => addItem('Education');
   const handleUpdateItem = (index, field, value) => updateItem(index, field, value);
@@ -20,42 +23,42 @@ export default function Education({ section, onUpdate }) {
     >
       <EditableText
         tag="h2"
-        className="text-xl font-bold uppercase border-b pb-2 mb-4"
+        className={styles.title}
         value={section.title}
         onUpdate={(text) => onUpdate({ ...section, title: text })}
       />
 
-      <div className="space-y-4">
+      <div className={styles.itemsContainer}>
         {section.items.map((item, index) => (
-          <div key={index} className="grid grid-cols-2 gap-4 relative group item">
+          <div key={index} className={styles.item}>
             
             <DelButton onClick={() => handleRemoveItem(index)} />
             
-            <div>
+            <div className={styles.leftColumn}>
               <EditableText
                 tag="p"
-                className="font-semibold"
+                className={styles.period}
                 value={item.period}
                 onUpdate={(text) => handleUpdateItem(index, 'period', text)}
               />
               <EditableText
                 tag="p"
-                className="text-gray-500"
+                className={styles.degree}
                 value={item.degree}
                 onUpdate={(text) => handleUpdateItem(index, 'degree', text)}
               />
             </div>
 
-            <div>
+            <div className={styles.rightColumn}>
               <EditableText
                 tag="p"
-                className="font-bold"
+                className={styles.university}
                 value={item.university}
                 onUpdate={(text) => handleUpdateItem(index, 'university', text)}
               />
               <EditableText
                 tag="p"
-                className="text-gray-600 text-sm"
+                className={styles.description}
                 value={item.description}
                 onUpdate={(text) => handleUpdateItem(index, 'description', text)}
               />
