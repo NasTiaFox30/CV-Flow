@@ -19,7 +19,7 @@ export default function SkillBar({ name, level }) {
 
   return (
     isEditing ? (
-      <div className="flex items-center justify-between py-1 relative text-gray-200">
+      <div className="flex items-center justify-between py-1 relative ">
         <div className="relative flex-shrink-0 flex items-center w-full">
           <div className="flex-grow bg-gray h-2 rounded-full border-2 border-double border-gray-300 mr-2">
             <div
@@ -38,7 +38,7 @@ export default function SkillBar({ name, level }) {
         </div>
       </div>
     ) : (
-      <div className="flex items-center justify-between py-1 relative text-gray-200">
+      <div className="flex items-center justify-between py-1 relative">
         {/* <p className="flex-grow">{name}</p> */}
         <EditableText
             tag="p"

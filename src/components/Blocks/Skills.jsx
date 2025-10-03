@@ -21,7 +21,7 @@ export default function Skills({ section, onUpdate }) {
     >
       <EditableText
         tag="h2"
-        className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 border-gray-200 pb-2"
+        className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 pb-2"
         value={section.title || "Skills"}
         onUpdate={(text) => onUpdate({ ...section, title: text })}
       />

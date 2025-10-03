@@ -40,12 +40,12 @@ export default function ContactInfo({ section, onUpdate }) {
     >
       <EditableText
         tag="h2"
-        className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 border-gray-200 pb-2"
+        className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 pb-2"
         value={section.title || "Contact"}
         onUpdate={(text) => onUpdate({ ...section, title: text })}
       />
       
-      <div className="space-y-4 text-gray-200">
+      <div className="space-y-4">
         {section.items.map((item, index) => {
           const iconKey = item.icon;
           const icon = iconsList[iconKey];
