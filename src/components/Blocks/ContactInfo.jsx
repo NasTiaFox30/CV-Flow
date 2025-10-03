@@ -4,6 +4,8 @@ import EditableText from "../EditableField";
 import AddButton from "../AddField";
 import DelButton from "../DelField";
 import { useBlockActions } from "../hooks/useBlockActions";
+import { blockStyles } from "../Templates/blockStyles";
+
 import Icon_phone from "../../assets/icons/phone.svg";
 import Icon_email from "../../assets/icons/email.svg";
 import Icon_adress from "../../assets/icons/adress.svg";
@@ -19,10 +21,12 @@ const iconsList = {
   website: Icon_website,
 };
 
-export default function ContactInfo({ section, onUpdate }) {
+export default function ContactInfo({ section, onUpdate, theme }) {
   const [isHovered, setIsHovered] = useState(false);
   const [editingIconIndex, setEditingIconIndex] = useState(null);
   const { addItem, updateItem, removeItem } = useBlockActions(section, onUpdate);
+
+  const styles = blockStyles[theme]?.ContactInfo || {};
 
   const addNewItem = () => addItem('ContactInfo');
   const handleUpdateItem = (index, field, value) => updateItem(index, field, value);
@@ -40,7 +44,7 @@ export default function ContactInfo({ section, onUpdate }) {
     >
       <EditableText
         tag="h2"
-        className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 pb-2"
+        className={styles.title}
         value={section.title || "Contact"}
         onUpdate={(text) => onUpdate({ ...section, title: text })}
       />
@@ -51,17 +55,17 @@ export default function ContactInfo({ section, onUpdate }) {
           const icon = iconsList[iconKey];
           
           return (
-            <div key={index} className="flex items-center relative group item">
+            <div key={index} className={styles.item}>
               <DelButton onClick={() => handleRemoveItem(index)} />
               
               <div className="relative">
                 <button
                   onClick={() => setEditingIconIndex(editingIconIndex === index ? null : index)}
-                  className="h-5 w-5 mr-3 flex items-center justify-center hover:bg-gray-400 rounded transition-colors"
+                  className={styles.iconButton}
                 >
                   <img src={icon} alt={iconKey} />
                 </button>
-                
+
                 {editingIconIndex === index && (
                   <div className="absolute right-10 top-0 bg-stone-600 border rounded shadow-lg z-20 p-2 grid grid-6 gap-2">
                     {Object.entries(iconsList).map(([key, iconSrc]) => (
@@ -81,8 +85,8 @@ export default function ContactInfo({ section, onUpdate }) {
               <EditableText
                 tag="p"
                 className="flex-1"
-                value={item.value || placeholder}
-                onUpdate={(text) => handleUpdateItem(index, 'value', text)}
+                value={item.value || "Add contact info"}
+                onUpdate={(text) => handleUpdateItem(index, "value", text)}
               />
             </div>
           );
