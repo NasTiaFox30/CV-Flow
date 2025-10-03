@@ -17,7 +17,7 @@ export default function Education({ section, onUpdate, theme }) {
   const handleRemoveItem = (index) => removeItem(index);
 
   return (
-    <div className="mb-6"
+    <div className="py-6"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
