@@ -19,8 +19,30 @@ export const blockStyles = {
       hobbyText: "ml-4 pl-2"
     },
      AboutMe: {
-      title: "text-xl font-bold uppercase border-b-2 pb-2 mb-4",
+      title: "text-xl font-bold uppercase border-b-1 pb-2 mb-4",
       content: "text-gray-700 leading-relaxed"
+    },
+     Education: {
+      title: "text-xl font-bold uppercase border-b-1 pb-2 mb-4",
+      itemsContainer: "space-y-4",
+      item: "grid grid-cols-2 gap-4 relative group item",
+      leftColumn: "",
+      period: "font-semibold",
+      degree: "text-gray-500",
+      rightColumn: "",
+      university: "font-bold",
+      description: "text-gray-600 text-sm"
+    },
+     WorkExperience: {
+      title: "text-xl font-bold uppercase border-b-1 pb-2 mb-4",
+      itemsContainer: "space-y-4",
+      item: "grid grid-cols-2 gap-4 relative group item",
+      leftColumn: "",
+      period: "font-semibold",
+      position: "text-gray-500",
+      rightColumn: "",
+      company: "font-bold",
+      description: "text-gray-600 text-sm"
     },
   },
 
