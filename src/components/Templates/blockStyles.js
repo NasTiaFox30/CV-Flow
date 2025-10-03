@@ -14,7 +14,7 @@ export const blockStyles = {
     ContactInfo: {
       title: "text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 pb-2",
       item: "flex items-center relative group",
-      iconButton: "h-5 w-5 mr-3 flex items-center justify-center hover:bg-gray-400 rounded transition-colors",
+      iconButton: "h-8 w-8 mr-3 flex items-center justify-center hover:bg-gray-400 rounded transition-colors",
       icons: "h-6 w-6"
     },
     Skills: {
@@ -71,6 +71,7 @@ export const blockStyles = {
       title: "text-xl font-bold uppercase mb-4 text-stone-700",
       item: "flex items-center gap-2 text-stone-600",
       iconButton: "h-6 w-6 mr-2 hover:text-stone-500",
+      icons: "h-5 w-5"
     },
      Skills: {
       title: "text-xl font-bold uppercase mb-4 text-stone-700",
