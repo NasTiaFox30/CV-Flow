@@ -31,7 +31,7 @@ export default function Skills({ section, onUpdate, theme }) {
       
       <div className="space-y-2">
         {section.items.map((skill, index) => (
-          <div key={index} className={`relative group item ${styles.items}`}>
+          <div key={index} className={`relative group item ${styles.item}`}>
             <DelButton onClick={() => handleRemoveItem(index)} />
             
             <SkillBar 

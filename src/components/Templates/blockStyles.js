@@ -9,7 +9,7 @@ export const blockStyles = {
     },
     Skills: {
       title: "text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 pb-2",
-      items: "",
+      item: "",
       variant: "bar",
     },
   },
@@ -17,12 +17,12 @@ export const blockStyles = {
   template2: {
     ContactInfo: {
       title: "text-xl font-bold uppercase mb-4 text-stone-700",
-      item: "flex items-center gap-2",
+      item: "flex items-center gap-2 text-stone-600",
       iconButton: "h-6 w-6 mr-2 hover:text-stone-500",
     },
      Skills: {
       title: "text-xl font-bold uppercase mb-4 text-stone-700",
-      items: "space-y-2 uppercase",
+      item: "space-y-2 uppercase text-stone-600",
       variant: "dots",
     },
   },
