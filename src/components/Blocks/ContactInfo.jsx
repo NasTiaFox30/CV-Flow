@@ -62,7 +62,7 @@ export default function ContactInfo({ section, onUpdate, theme }) {
                 </button>
 
                 {editingIconIndex === index && (
-                  <div className="absolute right-10 top-0 bg-stone-600 border rounded shadow-lg z-20 p-2 grid grid-6 gap-2">
+                  <div className="absolute text-white right-10 top-0 bg-stone-600 border rounded shadow-lg z-20 p-2 grid grid-6 gap-2">
                     {Object.entries(iconsList).map(([key, Icon]) => (
                       <button
                         key={key}
@@ -70,7 +70,7 @@ export default function ContactInfo({ section, onUpdate, theme }) {
                         className="p-1 h-9 w-9 hover:bg-stone-500 rounded transition-colors"
                         title={key}
                       >
-                        <Icon className={styles.icons} />
+                        <Icon className="h-6 w-6" />
                       </button>
                     ))}
                   </div>
