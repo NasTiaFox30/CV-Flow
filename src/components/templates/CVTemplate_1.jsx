@@ -17,7 +17,7 @@ export default function CVTemplate_1({ config }) {
           areas={[
             {
               id: "left-top-area",
-              className: "p-8 bg-stone-800 text-white col-span-1 flex flex-col",
+              className: "p-8 bg-stone-800 text-gray-200 col-span-1 flex flex-col",
               blocks: leftTopBlocks,
               setBlocks: setLeftBlocks,
             },

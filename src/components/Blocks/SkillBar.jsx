@@ -21,7 +21,7 @@ export default function SkillBar({ name, level }) {
     isEditing ? (
       <div className="flex items-center justify-between py-1 relative ">
         <div className="relative flex-shrink-0 flex items-center w-full">
-          <div className="flex-grow bg-gray h-2 rounded-full border-2 border-double border-gray-300 mr-2">
+          <div className="flex-grow h-2 rounded-full border-2 border-double  mr-2">
             <div
               className="bg-gray-200 h-full rounded-full transition-all duration-300 ease-in-out"
               style={{ width: `${currentLevel}%` }}
@@ -52,7 +52,7 @@ export default function SkillBar({ name, level }) {
           onClick={handleBarClick}
         >
           <div className="flex items-center w-full">
-            <div className="flex-grow bg-gray h-2 rounded-full border-2 border-double border-gray-300 mr-2">
+            <div className="flex-grow h-2 rounded-full border-2 border-double  mr-2">
               <div
                 className="bg-gray-200 h-full rounded-full transition-all duration-300 ease-in-out"
                 style={{ width: `${currentLevel}%` }}
