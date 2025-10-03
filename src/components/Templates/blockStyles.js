@@ -1,6 +1,11 @@
 // Styles for each template
 export const blockStyles = {
   template1: {
+    HeaderSections: {
+      container: "mb-6",
+      name: "text-5xl font-bold mb-1 font-extrabold tracking-wide",
+      title: "text-gray-500 mb-6 text-lg"
+    },
     ContactInfo: {
       title: "text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 pb-2",
       item: "flex items-center relative group",
@@ -47,6 +52,11 @@ export const blockStyles = {
   },
 
   template2: {
+    HeaderSections: {
+      container: "mb-8 mb-0",
+      name: "text-7xl font-bold mb-2 text-stone-800",
+      title: "text-stone-500 uppercase mb-6 text-lg"
+    },
     ContactInfo: {
       title: "text-xl font-bold uppercase mb-4 text-stone-700",
       item: "flex items-center gap-2 text-stone-600",
