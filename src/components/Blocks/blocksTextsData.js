@@ -1,4 +1,8 @@
 export const blocksTextsData = {
+  HeaderSections: {
+    name: "Name Surname",
+    title: "Graphic Designer"
+  },
   AboutMe: {
     title: "ABOUT ME",
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed euismod magna."
