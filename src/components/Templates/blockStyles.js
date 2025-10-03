@@ -1,6 +1,11 @@
 // Styles for each template
 export const blockStyles = {
   template1: {
+    AvatarFrame: {
+      container: "",
+      image: "h-60 w-50 object-cover mb-6",
+      avatar: "female"
+    },
     HeaderSections: {
       container: "mb-6",
       name: "text-5xl font-bold mb-1 font-extrabold tracking-wide",
@@ -52,6 +57,11 @@ export const blockStyles = {
   },
 
   template2: {
+     AvatarFrame: {
+      container: "flex justify-center",
+      image: "h-76 w-52 object-cover mb-6 rounded-4xl shadow-lg",
+      avatar: "male"
+    },
     HeaderSections: {
       container: "mb-8 mb-0",
       name: "text-7xl font-bold mb-2 text-stone-800",
