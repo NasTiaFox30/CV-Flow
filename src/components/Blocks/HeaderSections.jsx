@@ -1,26 +1,24 @@
-import EditableText from "../EditableField"
+import EditableText from "../EditableField";
+import { blockStyles } from "../Templates/blockStyles";
 
-export default function HeaderSections() {
-    return (
-    <div className="mb-6">
-        {/* <h1 className="text-5xl font-bold mb-1 font-extrabold tracking-wide">Name Surename</h1> */ }
-        <EditableText
-            tag="h1"
-            className="text-5xl font-bold mb-1 font-extrabold tracking-wide"
-            value="Name Surename"
-            onUpdate={(text) => onUpdate({ ...section, content: text })}
-        />
+export default function HeaderSections({ section, onUpdate, theme }) {
+  const styles = blockStyles[theme]?.HeaderSections || {};
 
-        {/* <p className="text-gray-500 mb-6 text-lg">Graphic Designer</p> */}
-        <EditableText
-            tag="p"
-            className="text-gray-500 mb-6 text-lg"
-            value="COMPANY OF LOREM IPSUM"
-            onUpdate={(text) => onUpdate({ ...section, content: text })}
-        />
+  return (
+    <div className={styles.container}>
+      <EditableText
+        tag="h1"
+        className={styles.name}
+        value={section.name}
+        onUpdate={(text) => onUpdate({ ...section, name: text })}
+      />
+
+      <EditableText
+        tag="p"
+        className={styles.title}
+        value={section.title}
+        onUpdate={(text) => onUpdate({ ...section, title: text })}
+      />
     </div>
-    )
+  );
 }
-
-
-        
