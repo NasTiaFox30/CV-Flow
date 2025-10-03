@@ -5,6 +5,7 @@ export default function CVTemplate_1({ config }) {
   const [leftTopBlocks, setLeftBlocks] = useState(config.left_top);
   const [rightTopBlocks, setRightTopBlocks] = useState(config.right_top);
   const [rightBottomBlocks, setRightBottomBlocks] = useState(config.right_bottom);
+  const theme = "template1";
 
   return (
     <div className="bg-gray-100 flex justify-center py-8">
@@ -22,6 +23,7 @@ export default function CVTemplate_1({ config }) {
               setBlocks: setLeftBlocks,
             },
           ]}
+          theme={theme}
         />
 
         {/* Right side */}
@@ -41,6 +43,7 @@ export default function CVTemplate_1({ config }) {
                 setBlocks: setRightBottomBlocks,
               },
             ]}
+            theme={theme}
           />
         </div>
       </div>
