@@ -9,9 +9,10 @@ export const templateConfig_1 = {
   right_bottom: ["Education", "WorkExperience",],
 };
 export const templateConfig_2 = {
-  left_top: ["AvatarFrame", "ContactInfo", "Hobbies", "Skills",],
-  right_top: ["HeaderSections", "AboutMe", ],
-  right_bottom: ["WorkExperience", "Education",], 
+  left_top: ["AvatarFrame"],
+  left_bottom: ["AboutMe", "ContactInfo", "Skills",],
+  right_top: ["HeaderSections"],
+  right_bottom: [ "Education", "WorkExperience",], 
 };
 
 
