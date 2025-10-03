@@ -12,6 +12,17 @@ export const blockStyles = {
       item: "",
       variant: "bar",
     },
+    Hobbies: {
+      title: "text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 pb-2",
+      container: "space-y-4",
+      item: "relative group item flex items-center",
+      hobbyText: "ml-4 pl-2"
+    },
+     AboutMe: {
+      container: "mb-6",
+      title: "text-xl font-bold uppercase border-b-2 pb-2 mb-4",
+      content: "text-gray-700 leading-relaxed"
+    },
   },
 
   template2: {
@@ -24,6 +35,17 @@ export const blockStyles = {
       title: "text-xl font-bold uppercase mb-4 text-stone-700",
       item: "space-y-2 uppercase text-stone-600",
       variant: "dots",
+    },
+     Hobbies: {
+      title: "text-xl font-bold uppercase mb-4 text-stone-700",
+      container: "space-y-3",
+      item: "relative group item flex items-center gap-2",
+      hobbyText: "list-none text-stone-600"
+    },
+     AboutMe: {
+      container: "mb-8",
+      title: "text-xl font-bold uppercase mb-4 text-stone-700",
+      content: "text-stone-600 leading-relaxed"
     },
   },
 };
