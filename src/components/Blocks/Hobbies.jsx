@@ -20,12 +20,12 @@ export default function Hobbies({ section, onUpdate }) {
     >
       <EditableText
         tag="h2"
-        className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 border-gray-200 pb-2"
+        className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 pb-2"
         value={section.title || "HOBBIES"}
         onUpdate={(text) => onUpdate({ ...section, title: text })}
       />
 
-      <div className="space-y-4 text-gray-200">
+      <div className="space-y-4">
         {section.items.map((hobby, index) => (
           <div key={index} className="relative group item flex items-center">
             <DelButton onClick={() => handleRemoveItem(index)} />
