@@ -1,66 +1,71 @@
 import { useState } from 'react';
 import EditableText from '../EditableField';
 
-export default function SkillBar({ name, level }) {
+export default function SkillBar({ name, level, onNameChange, onLevelChange, variant}) {
   const [isEditing, setIsEditing] = useState(false);
-  const [currentLevel, setCurrentLevel] = useState(level);
+  const [currentLevel, setCurrentLevel] = useState(level || 0);
 
-    const handleBarClick = () => {
-        setIsEditing(true);
-    };
-    const handleInput = (event) => {
-        if (event.type === 'change') {
-            let newValue = Math.min(100, Math.max(0, event.target.value));
-            setCurrentLevel(newValue);
-        } else if (event.type === 'blur') {
-            setIsEditing(false);
-        }
-    };
+  const handleBarClick = () => setIsEditing(true);
+  const handleBlur = () => setIsEditing(false);
 
-  return (
-    isEditing ? (
-      <div className="flex items-center justify-between py-1 relative ">
-        <div className="relative flex-shrink-0 flex items-center w-full">
-          <div className="flex-grow h-2 rounded-full border-2 border-double  mr-2">
-            <div
-              className="bg-gray-200 h-full rounded-full transition-all duration-300 ease-in-out"
-              style={{ width: `${currentLevel}%` }}
-            ></div>
-          </div>
-          <input
-            type="number"
-            value={currentLevel}
-            onChange={handleInput}
-            onBlur={handleInput}
-            autoFocus
-            className="w-16 text-center border rounded mr-2"
+  // - Progress Bar
+  const renderBar = () => (
+    <div className="flex-grow cursor-pointer" onClick={handleBarClick}>
+      <div className="flex items-center w-full">
+        <div className="flex-grow h-2 rounded-full border-2 border-double mr-2">
+          <div
+            className="bg-gray-400 h-full rounded-full transition-all duration-300"
+            style={{ width: `${currentLevel}%` }}
           />
         </div>
       </div>
-    ) : (
-      <div className="flex items-center justify-between py-1 relative">
-        {/* <p className="flex-grow">{name}</p> */}
-        <EditableText
-            tag="p"
-            className="flex-grow"
-            value={ name }
-            onUpdate={(text) => onUpdate({ ...section, content: text })}
-        />      
-                  
-        <div
-          className="flex-grow cursor-pointer"
-          onClick={handleBarClick}
-        >
-          <div className="flex items-center w-full">
-            <div className="flex-grow h-2 rounded-full border-2 border-double  mr-2">
-              <div
-                className="bg-gray-200 h-full rounded-full transition-all duration-300 ease-in-out"
-                style={{ width: `${currentLevel}%` }}
-              ></div>
-            </div>
-          </div>
-        </div>
+    </div>
+  );
+
+  // - Dots (5 lvls)
+  const renderDots = () => {
+    const maxDots = 5;
+    const activeDots = Math.round((currentLevel / 100) * maxDots);
+
+    return (
+      <div className="flex gap-2 cursor-pointer" onClick={handleBarClick}>
+        {Array.from({ length: maxDots }, (_, i) => (
+          <span
+            key={i}
+            className={`h-3 w-3 rounded-full ${i < activeDots ? "bg-stone-700" : "bg-stone-300"}`}
+          />
+        ))}
       </div>
-    )
+    );
+  };
+
+  return (
+    <div className="flex items-center py-1 relative">
+      <EditableText
+        tag="p"
+        className="flex-grow"
+        value={name}
+        onUpdate={onNameChange}
+      />
+
+      {variant === "dots" ? renderDots() : renderBar()}
+
+      {isEditing && (
+        <input
+          type="number"
+          value={currentLevel}
+          min={0}
+          max={100}
+          onChange={(e) => {
+            const newVal = Math.min(100, Math.max(0, Number(e.target.value)));
+            setCurrentLevel(newVal);
+            onLevelChange(newVal);
+          }}
+          onBlur={handleBlur}
+          autoFocus
+          className="w-16 text-center border rounded ml-2"
+        />
+      )}
+    </div>
   );
 }
