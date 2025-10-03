@@ -5,12 +5,15 @@ import AddButton from "../AddField";
 import DelButton from "../DelField";
 import SkillBar from "./SkillBar";
 import { useBlockActions } from "../hooks/useBlockActions";
+import { blockStyles } from "../Templates/blockStyles";
 
-export default function Skills({ section, onUpdate }) {
+export default function Skills({ section, onUpdate, theme }) {
   const [isHovered, setIsHovered] = useState(false);
   const { addItem, updateItem, removeItem } = useBlockActions(section, onUpdate);
 
-  const addNewItem = () => addItem('Skills');
+  const styles = blockStyles[theme]?.Skills || {};
+
+  const addNewItem = () => addItem("Skills");
   const handleUpdateItem = (index, field, value) => updateItem(index, field, value);
   const handleRemoveItem = (index) => removeItem(index);
 
@@ -21,14 +24,14 @@ export default function Skills({ section, onUpdate }) {
     >
       <EditableText
         tag="h2"
-        className="text-xl font-semibold mb-2 uppercase tracking-wide border-b-2 pb-2"
+        className={styles.title}
         value={section.title || "Skills"}
         onUpdate={(text) => onUpdate({ ...section, title: text })}
       />
       
       <div className="space-y-2">
         {section.items.map((skill, index) => (
-          <div key={index} className="relative group item">
+          <div key={index} className={`relative group item ${styles.items}`}>
             <DelButton onClick={() => handleRemoveItem(index)} />
             
             <SkillBar 
@@ -36,6 +39,7 @@ export default function Skills({ section, onUpdate }) {
               level={skill.level}
               onNameChange={(text) => handleUpdateItem(index, 'name', text)}
               onLevelChange={(value) => handleUpdateItem(index, 'level', value)}
+              variant={styles.variant}
             />
           </div>
         ))}
