@@ -1,5 +1,3 @@
-// CVLayout.jsx
-import React from "react";
 import { useDroppable } from "@dnd-kit/core";
 import { useSortable, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -57,7 +55,6 @@ function SortableBlock({ id, instance, onUpdateInstance, onRemoveInstance, theme
 }
 
 export default function CVLayout({ areas, instances, onUpdateInstance, onRemoveInstance, theme }) {
-  // areas — це масив об'єктів: { id, className, blocks } де blocks — масив instance-id
   return (
     <>
       {areas.map((area) => (
