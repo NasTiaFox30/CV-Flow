@@ -4,6 +4,7 @@ import { templateMap } from "./Templates/templatesStorage";
 import BlocksToolbar from "./BlocksToolbar";
 import restart_icon from "../assets/icons/restart-icon.svg";
 import { blocksTextsData } from "./Blocks/blocksTextsData";
+import PrintButton from "./PrintButton";
 
 // unic instance id
 const genInstanceId = (type) =>
@@ -133,9 +134,10 @@ export default function CreateScreen({ selectedTemplateId, onGoBack }) {
           </button>
 
           <BlocksToolbar />
+          <PrintButton/>
         </div>
-
-        <div className="flex-1 overflow-auto p-8 ml-64">
+        
+        <div className="flex-1 overflow-auto p-8 ml-64 print:p-0 print:ml-0">
           <TemplateComponent
             config={areasConfig}
             instances={instances}
