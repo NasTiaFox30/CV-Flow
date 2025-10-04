@@ -31,3 +31,29 @@
 .item:hover .delbutton {
     opacity: 1;
 }
+
+
+/* Print */
+@media print {
+
+    body * {
+        visibility: hidden;
+        overflow: hidden !important;
+    }
+
+    #resume_print,
+    #resume_print * {
+        visibility: visible;
+        overflow: visible !important;
+    }
+
+    #resume_print {
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        background-color: white !important;
+    }
+}
