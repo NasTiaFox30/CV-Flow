@@ -27,7 +27,7 @@ export default function CVTemplate_2({config, instances, onUpdateInstance, onRem
   };
 
   return (
-    <div className="bg-gray-100 flex justify-center py-8">
+    <div id="resume_print" className="bg-gray-100 flex justify-center py-8 print:p-0">
       <div
         className="bg-white shadow-lg grid grid-cols-5"
         style={{width: "210mm", height: "297mm"}} // A4 format wrap
