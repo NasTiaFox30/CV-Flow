@@ -3,8 +3,6 @@ import { DndContext, closestCenter } from "@dnd-kit/core";
 import { templateMap } from "./Templates/templatesStorage";
 import BlocksToolbar from "./BlocksToolbar";
 import restart_icon from "../assets/icons/restart-icon.svg";
-import CVTemplate_1 from "./Templates/CVTemplate_1";
-import CVTemplate_2 from "./Templates/CVTemplate_2";
 import { blocksTextsData } from "./Blocks/blocksTextsData";
 
 // unic instance id
@@ -17,6 +15,8 @@ export default function CreateScreen({ selectedTemplateId, onGoBack }) {
   const template = templateMap[selectedTemplateId];
   if (!template)
     return <p className="text-center text-lg mt-12">Ops! That template not found ;(</p>;
+  
+  const TemplateComponent = template.component;
 
   // 1) перетворюємо початкову конфігурацію (масиви типів) → масиви instance-id + об'єкт instances
   const buildInitial = (tmplConfig) => {
@@ -40,9 +40,6 @@ export default function CreateScreen({ selectedTemplateId, onGoBack }) {
   const [areasConfig, setAreasConfig] = useState(initial.areas);
   const [instances, setInstances] = useState(initial.instances);
 
-  const updateAreaBlocks = (areaKey, newBlocks) =>
-    setAreasConfig((prev) => ({ ...prev, [areaKey]: newBlocks }));
-
   const updateInstanceSection = (instanceId, newSection) =>
     setInstances((prev) => ({ ...prev, [instanceId]: { ...prev[instanceId], section: newSection } }));
 
@@ -55,7 +52,7 @@ export default function CreateScreen({ selectedTemplateId, onGoBack }) {
     });
   };
 
-  // головна логіка dragEnd
+
   const handleDragEnd = (event) => {
     const { active, over } = event;
     if (!over) return;
@@ -63,18 +60,18 @@ export default function CreateScreen({ selectedTemplateId, onGoBack }) {
     const activeData = active.data?.current || {};
     const overData = over.data?.current || {};
 
-    // 1) Перетягування з тулбара -> створюємо новий instance
+    // Drag from TollBar -> new instance
     if (activeData.fromToolbar) {
       const type = activeData.type;
       const newId = genInstanceId(type);
 
-      // створюємо instance з дефолтними даними
+      // instance (default data)
       setInstances((prev) => ({
         ...prev,
         [newId]: { type, section: deepClone(blocksTextsData[type] || { title: type, content: "" }) },
       }));
 
-      // визначаємо areaKey: або по droppable area (over.data.areaKey), або по тому, на який instance кинули
+      // check areaKey - droppable area (over.data.areaKey) OR instance
       let areaKey = overData.areaKey;
       if (!areaKey) {
         areaKey = Object.keys(areasConfig).find((k) => areasConfig[k].includes(over.id));
@@ -83,7 +80,6 @@ export default function CreateScreen({ selectedTemplateId, onGoBack }) {
 
       setAreasConfig((prev) => {
         const current = [...(prev[areaKey] || [])];
-        // якщо кинули на існуючий instance -> вставляємо перед ним, інакше в кінець
         const idx = current.indexOf(over.id);
         if (idx === -1) current.push(newId);
         else current.splice(idx, 0, newId);
@@ -93,7 +89,7 @@ export default function CreateScreen({ selectedTemplateId, onGoBack }) {
       return;
     }
 
-    // 2) Переміщення існуючого instance (reorder / move between areas)
+    // 2) move present instance (reorder / move between areas)
     const activeId = active.id;
     const overId = over.id;
 
@@ -102,7 +98,7 @@ export default function CreateScreen({ selectedTemplateId, onGoBack }) {
     if (!sourceAreaKey || !destAreaKey) return;
 
     if (sourceAreaKey === destAreaKey) {
-      // reorder всередині однієї зони
+      // reorder
       setAreasConfig((prev) => {
         const arr = [...prev[sourceAreaKey]];
         const oldIndex = arr.indexOf(activeId);
@@ -113,7 +109,7 @@ export default function CreateScreen({ selectedTemplateId, onGoBack }) {
         return { ...prev, [sourceAreaKey]: arr };
       });
     } else {
-      // move між зонами
+      // move between areas
       setAreasConfig((prev) => {
         const src = prev[sourceAreaKey].filter((i) => i !== activeId);
         const dst = [...prev[destAreaKey]];
@@ -140,24 +136,12 @@ export default function CreateScreen({ selectedTemplateId, onGoBack }) {
         </div>
 
         <div className="flex-1 overflow-auto p-8 ml-64">
-          {selectedTemplateId === 1 && (
-            <CVTemplate_1
-              config={areasConfig}
-              instances={instances}
-              onUpdateArea={updateAreaBlocks}
-              onUpdateInstance={updateInstanceSection}
-              onRemoveInstance={removeInstance}
-            />
-          )}
-          {selectedTemplateId === 2 && (
-            <CVTemplate_2
-              config={areasConfig}
-              instances={instances}
-              onUpdateArea={updateAreaBlocks}
-              onUpdateInstance={updateInstanceSection}
-              onRemoveInstance={removeInstance}
-            />
-          )}
+          <TemplateComponent
+            config={areasConfig}
+            instances={instances}
+            onUpdateInstance={updateInstanceSection}
+            onRemoveInstance={removeInstance}
+          />
         </div>
       </div>
     </DndContext>
