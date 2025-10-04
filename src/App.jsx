@@ -16,6 +16,10 @@ export default function App() {
     setTemplateId(id);
     console.log("template selected - " + id);
   };
+  
+  const handleGoBack = () => {
+    setTemplateId(null);
+  };
 
   return (
     <div className="bg-gray-100 min-h-screen p-8 relative overflow-hidden">
@@ -40,7 +44,10 @@ export default function App() {
             exit="exit"
             transition={{ type: 'linear' }}
           >
-            <CreateScreen selectedTemplateId={templateId} />
+            <CreateScreen 
+                selectedTemplateId={templateId} 
+                onGoBack={handleGoBack}
+            />
           </motion.div>
         )}
       </AnimatePresence>
