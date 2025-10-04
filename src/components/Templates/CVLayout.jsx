@@ -4,16 +4,13 @@ import { CSS } from "@dnd-kit/utilities";
 import { blocksMap } from "../Blocks/blocksMap";
 
 function DroppableArea({ id, areaKey, children, className }) {
-  const { setNodeRef, isOver } = useDroppable({
+  const { setNodeRef } = useDroppable({
     id,
     data: { areaKey },
   });
 
   return (
-    <div
-      ref={setNodeRef}
-      className={`${className} relative transition-all ${isOver ? "ring-2 ring-blue-400 bg-blue-50/30" : ""}`}
-    >
+    <div ref={setNodeRef} className={`${className} relative transition-all`}>
       {children}
     </div>
   );
