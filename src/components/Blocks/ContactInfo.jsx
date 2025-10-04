@@ -16,6 +16,7 @@ const iconsList = {
   linkedin: Icon_linkedin,
   website: Icon_website,
 };
+const DefaultIcon = iconsList['phone'];
 
 export default function ContactInfo({ section, onUpdate, theme }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -47,7 +48,7 @@ export default function ContactInfo({ section, onUpdate, theme }) {
       
       <div className="space-y-4">
         {section.items.map((item, index) => {
-          const IconComponent = iconsList[item.icon];
+          const IconComponent = iconsList[item.icon] || DefaultIcon; 
           
           return (
             <div key={index} className={styles.item}>
