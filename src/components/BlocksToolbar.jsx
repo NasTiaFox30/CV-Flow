@@ -3,12 +3,11 @@ import { useDraggable } from "@dnd-kit/core";
 import { blocksMap } from "./Blocks/blocksMap";
 
 function DraggableTool({ id: type }) {
-  // унікальний id для draggable елемента в тулбарі (щоб ніколи не колайдив з instance-id у шаблоні)
   const toolDragId = useRef(`tool-${type}-${Math.random().toString(36).slice(2, 8)}`);
 
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
     id: toolDragId.current,
-    data: { fromToolbar: true, type }, // передаємо type, щоб на drop створити instance потрібного типу
+    data: { fromToolbar: true, type },
   });
 
   const style = transform
@@ -47,7 +46,7 @@ function DraggableTool({ id: type }) {
 export default function BlocksToolbar() {
   const availableBlocks = Object.keys(blocksMap);
   return (
-    <div className="mt-5 w-56 p-4 bg-gray-50 border-r border-gray-200 h-full overflow-y-auto text-gray-800 rounded-lg shadow-lg">
+    <div className="mt-5 w-56 p-4 ml-5 bg-gray-50 overflow-y-hide text-gray-800 rounded-lg shadow-lg">
       <h3 className="text-lg font-bold mb-4 text-gray-800">Blocks Toolbox</h3>
       <p className="text-sm text-gray-600 mb-4">Drag blocks to add them to your CV</p>
       <div className="space-y-2">
