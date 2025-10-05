@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import CreateScreen from './components/CreateScreen';
 import HeroScreen from './components/HeroScreen';
+import Footer from './components/Footer';
 
 const animations_variants = {
   hidden: { opacity: 0, x: 0, y: 200 },
@@ -51,6 +52,8 @@ export default function App() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <Footer/>
     </div>
   );
 }
