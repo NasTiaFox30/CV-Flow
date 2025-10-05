@@ -51,7 +51,7 @@ export default function ContactInfo({ section, onUpdate, theme }) {
           const IconComponent = iconsList[item.icon] || DefaultIcon; 
           
           return (
-            <div key={index} className={styles.item}>
+            <div key={index} className={`relative group item ${styles.item}`}>
               <DelButton onClick={() => handleRemoveItem(index)} />
               
               <div className="relative">
