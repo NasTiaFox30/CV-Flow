@@ -34,7 +34,7 @@ export default function CVTemplate_2({config, instances, onUpdateInstance, onRem
       >
         {/* Left side */}
         <div className="relative col-span-2 flex flex-col h-full">
-          <div className="absolute mt-41 w-full h-30 bg-stone-800"></div>
+          <div className="absolute mt-41 w-full z-10 h-30 bg-stone-800"></div>
           <CVLayout
             areas={areasScheme.left.map((a) => ({
               ...a,
