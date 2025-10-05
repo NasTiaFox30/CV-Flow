@@ -149,7 +149,7 @@ export default function CreateScreen({ selectedTemplateId, onGoBack }) {
           <PrintButton/>
         </div>
 
-        <div className="flex-1 overflow-auto p-8 ml-64 relative">
+        <div className="flex-1 overflow-auto p-8 ml-64 print:p-0 print:ml-0">
           <TemplateComponent
             config={areasConfig}
             instances={instances}
