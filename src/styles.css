@@ -56,4 +56,10 @@
         box-shadow: none !important;
         background-color: white !important;
     }
+
+    img.rounded-4xl {
+        border-radius: 2rem !important;
+        overflow: visible !important;
+        clip-path: inset(0 round 2rem);
+    }
 }
