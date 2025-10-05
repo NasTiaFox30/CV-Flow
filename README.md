@@ -1,12 +1,29 @@
-# React + Vite
+# CV-Flow
+React + Vite + Tailwindcss
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Liczba godzin
+50+ god.
 
-Currently, two official plugins are available:
+## Rozpoczęty - Zakończony
+7.09.2025 - 5.10.25
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+# Application:
+CV-Flow is a modern, flexible CV (Curriculum Vitae) builder developed using React, Vite, and Tailwind CSS. It allows users to quickly create professional documents using ready-made templates (currently 2 are available). The application provides full control over the CV structure thanks to Drag and Drop technology for rearranging main blocks, as well as flexible adding, deleting, and editing of all fields, including photos and text. The final CV is easily saved in PDF format, ready for printing.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
+## Libraries:
+- tailwindcss @tailwindcss/vite
+- framer-motion
+- @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
+
+## Design
+Exaples of CV Teplates :
+https://www.freepik.com/premium-vector/editable-modern-resume-minimalist-cv-template-design_17502299.htm
+
+
+## Visit site: 
+
+
+---------------------------------------------------------------
+_**Creator: Anastasiia Bzova 2025**_
