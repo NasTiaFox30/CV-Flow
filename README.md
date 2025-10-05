@@ -1,10 +1,10 @@
 # CV-Flow
 React + Vite + Tailwindcss
 
-## Liczba godzin
+## Hours
 50+ god.
 
-## Rozpoczęty - Zakończony
+## Started - Ended
 7.09.2025 - 5.10.25
 
 
