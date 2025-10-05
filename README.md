@@ -23,7 +23,7 @@ https://www.freepik.com/premium-vector/editable-modern-resume-minimalist-cv-temp
 
 
 ## Visit site: 
-
+https://nastiafox30.github.io/CV-Flow/
 
 ---------------------------------------------------------------
 _**Creator: Anastasiia Bzova 2025**_
