@@ -135,7 +135,7 @@ export default function CreateScreen({ selectedTemplateId, onGoBack }) {
         setActiveBlockType(null);
       }}
     >
-      <div className="flex flex-row h-screen">
+      <div className="flex flex-row">
         <div className="fixed left-0 top-0 h-full">
           <button
             onClick={onGoBack}
