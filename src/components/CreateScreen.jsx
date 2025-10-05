@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DndContext, closestCenter } from "@dnd-kit/core";
+import { DndContext, closestCenter, DragOverlay } from "@dnd-kit/core";
 import { templateMap } from "./Templates/templatesStorage";
 import BlocksToolbar from "./BlocksToolbar";
 import restart_icon from "../assets/icons/restart-icon.svg";
@@ -13,6 +13,8 @@ const genInstanceId = (type) =>
 const deepClone = (obj) => JSON.parse(JSON.stringify(obj || {}));
 
 export default function CreateScreen({ selectedTemplateId, onGoBack }) {
+  const [activeBlockType, setActiveBlockType] = useState(null);
+
   const template = templateMap[selectedTemplateId];
   if (!template)
     return <p className="text-center text-lg mt-12">Ops! That template not found ;(</p>;
@@ -122,7 +124,17 @@ export default function CreateScreen({ selectedTemplateId, onGoBack }) {
   };
 
   return (
-    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+    <DndContext
+      collisionDetection={closestCenter}
+      onDragStart={(event) => {
+        const activeData = event.active.data?.current;
+        if (activeData?.fromToolbar) setActiveBlockType(activeData.type);
+      }}
+      onDragEnd={(event) => {
+        handleDragEnd(event);
+        setActiveBlockType(null);
+      }}
+    >
       <div className="flex flex-row h-screen">
         <div className="fixed left-0 top-0 h-full">
           <button
@@ -136,8 +148,8 @@ export default function CreateScreen({ selectedTemplateId, onGoBack }) {
           <BlocksToolbar />
           <PrintButton/>
         </div>
-        
-        <div className="flex-1 overflow-auto p-8 ml-64 print:p-0 print:ml-0">
+
+        <div className="flex-1 overflow-auto p-8 ml-64 relative">
           <TemplateComponent
             config={areasConfig}
             instances={instances}
@@ -146,6 +158,14 @@ export default function CreateScreen({ selectedTemplateId, onGoBack }) {
           />
         </div>
       </div>
+
+      <DragOverlay>
+        {activeBlockType ? (
+          <div className="p-3 bg-white border border-gray-200 rounded-lg shadow-lg text-sm font-medium text-gray-700">
+            {activeBlockType}
+          </div>
+        ) : null}
+      </DragOverlay>
     </DndContext>
   );
 } 
